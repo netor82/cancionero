@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Ábranse los cielos",
+        "artist": "Artist A",
+        "source": 1,
+        "comments": "Tonalidad en Cm, cejilla en 3º traste",
+        "tags": [1, 41]
+    },
+    {
+        "id": 2,
+        "title": "Aceptando nuestra carne",
+        "artist": "",
+        "source": 2,
+        "comments": "",
+        "tags": [2,25,3,41]
+    },
+    {
+        "id": 3,
+        "title": "A Dios den gracias los pueblos",
+        "artist": "",
+        "source": 3,
+        "comments": "",
+        "tags": [17,31,38,41]
+    },
+    {
+        "id": 4,
+        "title": "Adiós, Reina del cielo",
+        "artist": "",
+        "source": 4,
+        "comments": "",
+        "tags": [25,41]
+    }
+]

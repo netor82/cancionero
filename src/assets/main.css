@@ -1,0 +1,149 @@
+@import './base.css';
+
+body {
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
+}
+
+button{
+  background-color: transparent;
+  cursor: pointer;
+  font-size: large;
+  border: 0;
+  padding: 4px 8px;
+}
+
+input {
+  background-color: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: 0.4s;
+  margin-right: 5px;
+  font-size: large;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-heading);
+  cursor: pointer;
+}
+li:hover {
+  background-color: var(--color-hover);
+}
+
+header {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 1rem;
+}
+header > .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+main {
+  flex: 1;
+  display: flex;
+  align-content: stretch;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+main section {
+  display: none;
+  flex: 1;
+  padding: 3px;
+  overflow: auto;
+}
+main section.active {
+  display: block;
+}
+
+footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.app-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+a, .green {
+  text-decoration: none;
+  color: var(--color-green);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+.tag {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background-color: var(--color-background-soft);
+  font-size: small;
+  padding: 4px;
+  border-radius: 8px;
+  margin-right: 2px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.tag.active {
+  background-color: var(--color-green);
+  color: var(--color-background);
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: var(--color-hover);
+  }
+}
+
+@media (min-width: 1024px) {
+  main section {
+    display: block;
+    padding: 1rem;
+  }
+  main section:last-child{
+    border-left: solid 1px var(--color-border);
+  }
+  h1, h3 {
+    text-align: left;
+  }
+  .hidden-big {
+    display: none;
+  }
+}

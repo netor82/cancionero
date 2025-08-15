@@ -1,0 +1,723 @@
+[
+    {
+        "id": 1,
+        "text": [
+            "ÁBRANSE LOS CIELOS, LLUEVAN AL MESÍAS,",
+            "QUE ES NUESTRO CONSUELO, NUESTRO RE-DENTOR",
+            "",
+            "Claman los collados: ven ya Sal---va---dor,",
+            "los sedientos prados: llega Re---den---tor,",
+            "y el erial sin río, pide ya el rocío.",
+            "",
+            "Huella las tinieblas de muerte y ho---rror,",
+            "a fundir las nieblas venga tu ful--gor,",
+            "que el desierto es largo y el destierro amargo.",
+            "",
+            "Broten ya las flores en nuestra here---dad,",
+            "cedan los rigores de la adver---si---dad,",
+            "y la tierra ría, viendo el nuevo día."
+        ],
+        "notes": [
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 20
+                },
+                {
+                    "note": 4,
+                    "chord": "",
+                    "position": 33
+                }
+            ],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 4,
+                    "chord": "",
+                    "position": 33
+                },
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 39
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 13
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 21
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 28
+                },
+                {
+                    "note": 11,
+                    "chord": "7",
+                    "position": 34
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 39
+                }
+            ],
+            [
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 6
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 14
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 28
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 33
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 39
+                }
+            ],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 15
+                },
+                {
+                    "note": 4,
+                    "chord": "",
+                    "position": 20
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 13
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 21
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 28
+                },
+                {
+                    "note": 11,
+                    "chord": "7",
+                    "position": 33
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 38
+                }
+            ],
+            [
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 13
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 27
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 30
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 35
+                }
+            ],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 19
+                },
+                {
+                    "note": 4,
+                    "chord": "",
+                    "position": 27
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 14
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 21
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 28
+                },
+                {
+                    "note": 11,
+                    "chord": "7",
+                    "position": 34
+                },
+                {
+                    "note": 4,
+                    "chord": "m",
+                    "position": 39
+                }
+            ],
+            [
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 6
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 12
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 26
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 32
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 37
+                }
+            ],
+            [
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 7,
+                    "chord": "",
+                    "position": 12
+                },
+                {
+                    "note": 4,
+                    "chord": "",
+                    "position": 17
+                }
+            ]
+        ]
+    },
+    {
+        "id": 2,
+        "text": [
+            "Aceptando nuestra carne Cristo nos redimió. (2)",
+            "Y la luz nació en María, Madre del Salvador. (2)",
+            "Es la luz que nace en la oscuridad.",
+            "Es el Dios con nosotros su fuerza triun--fa del mal. (2)",
+            "",
+            "Conviviendo con los hombres Cristo nos redimió. (2)",
+            "En silencio le seguía Madre del Salvador. (2)",
+            "Él murió luchando por el amor.",
+            "A los pobres del pueblo les ofreció su verdad. (2)",
+            "",
+            "El amor venció a la muerte Cristo nos redimió. (2)",
+            "Se alegraba en su triunfo Madre del Salvador. (2)",
+            "Esperad veremos la Salvación.",
+            "Cristo venció por siempre tendremos la libertad. (2)",
+            "",
+            "Nuestra tierra se hace nueva Cristo nos redimió. (2)",
+            "La construyes con nosotros Madre del Salvador. (2)"
+        ],
+        "notes": [
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 18
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 24
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 35
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 39
+                }
+            ],
+            [
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 7,
+                    "chord": "m",
+                    "position": 11
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 20
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 25
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 35
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 40
+                }
+            ],
+            [
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 14
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 31
+                }
+            ],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 34
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 41
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 48
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 15
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 20
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 25
+                }
+            ],
+            [
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 7,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 15
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 20
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 25
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 30
+                }
+            ],
+            [
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 5
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 10
+                }
+            ],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 5
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 15
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 15
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 20
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 25
+                }
+            ],
+            [
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 7,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 15
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 20
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 25
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 30
+                }
+            ],
+            [
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 0
+                },
+                {
+                    "note": 9,
+                    "chord": "m",
+                    "position": 5
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 10
+                }
+            ],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 5
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 15
+                }
+            ],
+            [],
+            [
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 15
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 20
+                },
+                {
+                    "note": 5,
+                    "chord": "",
+                    "position": 25
+                }
+            ],
+            [
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 0
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 5
+                },
+                {
+                    "note": 7,
+                    "chord": "m",
+                    "position": 10
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 15
+                },
+                {
+                    "note": 11,
+                    "chord": "b",
+                    "position": 20
+                },
+                {
+                    "note": 0,
+                    "chord": "",
+                    "position": 25
+                },
+                {
+                    "note": 2,
+                    "chord": "m",
+                    "position": 30
+                }
+            ]
+        ]
+    }
+]
