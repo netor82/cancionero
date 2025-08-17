@@ -84,37 +84,42 @@ function copyTags() {
 </script>
 
 <template>
-    <input v-model="message" @keyup.enter="process"/>
-    <button @click="process">🤖</button>
-    <button @click="reset">🗑️</button>
-
-    <input type="number" v-model="valor" @input="setPosition" ref="myInput" />
-    {{ lyrics?.id }}
-
-    
-    <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;">
-        <div class="ruler" style="left:10ch">1</div>
-        <div class="ruler" style="left:20ch">2</div>
-        <div class="ruler" style="left:30ch">3</div>
-        <div class="ruler" style="left:40ch">4</div>
-        <div class="ruler" style="left:50ch">5</div>
-        <div class="ruler" style="left:60ch">6</div>
-        <div v-for="(notes, index) in lyrics.notes" :key="index">
-            <p class="chords">
-                <Chord v-for="chord in notes" :chord="chord" @click="nota = chord" :transpose="0" />&nbsp;
-            </p>
-            <p>{{ lyrics.text[index] }}</p>
+    <div style="overflow: auto;">
+        <div>
+            <input v-model="message" @keyup.enter="process"/>
+            <button @click="process">🤖</button>
+            <button @click="reset">🗑️</button>
+        
+            <input type="number" v-model="valor" @input="setPosition" ref="myInput" />
+            {{ lyrics?.id }}
         </div>
 
+        <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;">
+            <div class="ruler" style="left:10ch">1</div>
+            <div class="ruler" style="left:20ch">2</div>
+            <div class="ruler" style="left:30ch">3</div>
+            <div class="ruler" style="left:40ch">4</div>
+            <div class="ruler" style="left:50ch">5</div>
+            <div class="ruler" style="left:60ch">6</div>
+            <div v-for="(notes, index) in lyrics.notes" :key="index">
+                <p class="chords">
+                    <Chord v-for="chord in notes" :chord="chord" @click="nota = chord" :transpose="0" />&nbsp;
+                </p>
+                <p>{{ lyrics.text[index] }}</p>
+            </div>
+    
+        </div>
+    
+        <span class="tag-search">
+            <input type="text" v-model="searchTag" placeholder="Etiqueta" />
+            <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
+            <TagComponent v-if="!options.length" v-for="t in tags" :id="t.id" :tag="t" :callback="removeTag" />
+            <button v-if="tags.length" @click="tags = []">❌</button>
+            <button v-if="tags.length" @click="copyTags()">📋</button>
+        </span>
     </div>
 
-    <span class="tag-search">
-        <input type="text" v-model="searchTag" placeholder="Etiqueta" />
-        <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
-        <TagComponent v-if="!options.length" v-for="t in tags" :id="t.id" :tag="t" :callback="removeTag" />
-        <button v-if="tags.length" @click="tags = []">❌</button>
-        <button v-if="tags.length" @click="copyTags()">📋</button>
-    </span>
+    
 
 </template>
 

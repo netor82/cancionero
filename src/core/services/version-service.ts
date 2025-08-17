@@ -62,7 +62,7 @@ class VersionService {
     }
 
     public get(): string {
-        this.getLocal()
+        this.versions = this.getLocal()
         return this.versions.join('.')
     }
 

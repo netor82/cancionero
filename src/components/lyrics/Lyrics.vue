@@ -52,7 +52,7 @@ const changeTranspose = (amount: number) => {
 </script>
 
 <template>
-  <div class="lyrics">
+  <div class="lyrics vertical-scroll">
     <SongInfo />
     <p v-if="message">{{ message }}</p>
 

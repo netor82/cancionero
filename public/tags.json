@@ -40,6 +40,9 @@
   {"id":39,"name":"Pascua 7° Domingo"},
   {"id":40,"name":"Pascua 4° Domingo"},
   {"id":41,"name":"Cantar Alegres"},
-  {"id":42,"name":"Schola Cantorum"}
-  
+  {"id":42,"name":"Schola Cantorum"},
+  {"id":43,"name":"Horas Santas"},  
+  {"id":44,"name":"Sagrado Corazón"},
+  {"id":45,"name":"Jesucristo rey del universo"},
+  {"id":46,"name":"Padre Nuestro"}
 ]

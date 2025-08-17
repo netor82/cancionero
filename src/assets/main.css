@@ -62,30 +62,45 @@ main {
 
 main section {
   display: none;
-  flex: 1;
   padding: 3px;
-  overflow: auto;
+  flex: 1 1 100%;
 }
 main section.active {
-  display: block;
+  display: flex;
+}
+main section .wrapper, main section .wrapper > *{
+  flex: 1 1 100%;
 }
 
+.vertical-scroll-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-scroll {
+  overflow: scroll;
+}
+
+
 footer {
-  flex-shrink: 0;
   border-top: 1px solid var(--color-border);
-  text-align: center;
+}
+footer .wrapper{
+  justify-content: center;
 }
 
 .app-layout {
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
 }
 
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
   padding: 3px;
+  display: flex;
 }
 
 .inline {
@@ -134,7 +149,7 @@ a, .green {
 
 @media (min-width: 1024px) {
   main section {
-    display: block;
+    display: flex;
     padding: 1rem;
   }
   main section:last-child{

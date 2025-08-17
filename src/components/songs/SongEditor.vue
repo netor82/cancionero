@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { store } from '@/core/store';
 import type { Tag } from '@/core/interfaces/tag';
 import TagComponent from '@/components/Tag.vue';
@@ -11,6 +11,9 @@ const myText = ref<HTMLTextAreaElement | null>(null);
 const searchTag = ref('');
 const tags = ref<Tag[]>([]);
 const options = ref<Tag[]>([]);
+const tagId = computed(() => {
+    return tags.value.length > 0 ? tags.value[0].id : 0;
+});
 
 watch(searchTag, (newValue) => {
     newValue = newValue.trim().toLocaleLowerCase();
@@ -22,7 +25,7 @@ watch(searchTag, (newValue) => {
 });
 
 function addTag(tag: Tag) {
-    tags.value.push(tag);
+    tags.value = [tag];
     searchTag.value = '';
 }
 
@@ -59,18 +62,23 @@ function printSongs() {
 </script>
 
 <template>
-    <span class="tag-search">
-        <input type="text" v-model="searchTag" placeholder="Etiqueta" />
-        <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
-        <TagComponent v-if="!options.length" v-for="t in tags" :id="t.id" :tag="t" :callback="removeTag" />
-        <button v-if="tags.length" @click="tags = []">❌</button>
-    </span>
     <div>
-        <input type="text" v-model="songIds" placeholder="IDs de canciones (separados por comas)" />
-        <button @click="applyTag">🤖</button>
-        <button @click="printSongs">🗒️</button>
-        <br />
-        <textarea ref="myText"> </textarea>
+        <div>
+            <span class="tag-search">
+                <input type="text" v-model="searchTag" placeholder="Etiqueta" />
+                <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
+                <TagComponent v-if="!options.length" v-for="t in tags" :id="t.id" :tag="t" :callback="removeTag" />
+                <button v-if="tags.length" @click="tags = []">❌</button>
+                <span>{{ tagId }}</span>
+            </span>
+            <div>
+                <input type="text" v-model="songIds" placeholder="IDs de canciones (separados por comas)" />
+                <button @click="applyTag">🤖</button>
+                <button @click="printSongs">🗒️</button>
+                <br />
+                <textarea ref="myText"> </textarea>
+            </div>
+        </div>
     </div>
 
 </template>

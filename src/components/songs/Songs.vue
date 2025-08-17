@@ -39,19 +39,25 @@ function addTag(tag: Tag) {
 
 
 <template>
-  <div class="songs">
-    <TextSearch />&nbsp;
-    <TagSearch />
-    <ul>
-      <li v-for="song in items" :key="song.id" @click="setSong(song)">
-        <span>{{ song.title }}</span> - 
-        <TagComponent v-for="tag in song.tags" :id="tag" :tag="null" class="tag" 
-          :callback="addTag" :class="{ active: store.tags.some(t => t.id === tag) }" />
-      </li>
-    </ul>
+  <div class="songs vertical-scroll-container">
+    <div class="search">
+      <TextSearch />&nbsp;
+      <TagSearch />
+    </div>
+    <div class="vertical-scroll">
+      <ul>
+        <li v-for="song in items" :key="song.id" @click="setSong(song)">
+          <span>{{ song.title }}</span> - 
+          <TagComponent v-for="tag in song.tags" :id="tag" :tag="null" class="tag" 
+            :callback="addTag" :class="{ active: store.tags.some(t => t.id === tag) }" />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
-<style scoped>
-
+<style>
+.songs .search{
+  padding: 3px 2px;
+}
 </style>
