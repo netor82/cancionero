@@ -2,13 +2,11 @@
 import { watch, ref, computed, toRaw } from 'vue'
 import { store } from '@/core/store'
 import type { Lyric } from '@/core/interfaces/lyrics'
-import LyricsService from '@/core/services/lyrics-service'
-import ProjectService from '@/core/services/project-service'
+import lyricsService from '@/core/services/lyrics-service'
+import projectService from '@/core/services/project-service'
 import SongInfo from './SongInfo.vue'
 import Chord from './Chord.vue'
 
-const lyricsService = new LyricsService()
-const projectService = new ProjectService()
 const message = ref('')
 const lyrics = ref<Lyric | null>(null)
 

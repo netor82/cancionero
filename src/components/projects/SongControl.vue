@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import ProjectService from '@/core/services/project-service'
+import projectService from '@/core/services/project-service'
 import { store } from '@/core/store'
 import { computed, toRaw } from 'vue'
 
 const project = computed(() => store.project)
 const added = computed(() => store.projectHas(store.song!.id))
-const projectService = new ProjectService()
 
 const includeExcludeSong = () : void => {
     if (added.value) {

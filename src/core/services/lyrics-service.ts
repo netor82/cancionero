@@ -6,13 +6,16 @@ import { deepToRaw } from '../utils/deepToRaw';
 
 
 
-export default class LyricsService extends BaseDbService {
+class LyricsService extends BaseDbService {
     private static instance : LyricsService;
 
-    constructor() {
-        super(StoreName.LYRICS, 'id');
-        if (LyricsService.instance) return LyricsService.instance;
-        LyricsService.instance = this;
+    private constructor() {
+        super(StoreName.LYRICS);
+    }
+
+    static getInstance() {
+        if (!LyricsService.instance) LyricsService.instance = new LyricsService();
+        return LyricsService.instance;
     }
 
     initDB(): Promise<void> {
@@ -38,9 +41,15 @@ export default class LyricsService extends BaseDbService {
         console.log(`Lyrics count: ${count}`);
         if (count > 0) return;
         
-        const lyrics = await this.fetchLyrics();
-        await this.saveAllLyrics(lyrics);
+        await this.loadFromServer();
         return Promise.resolve();
+    }
+
+    async loadFromServer() {
+        this.fetchLyrics().then(async (lyrics: Lyric[]) => {
+            await this.saveAllLyrics(lyrics);
+            return lyrics
+        });
     }
 
     private async fetchLyrics(): Promise<Lyric[]> {
@@ -56,7 +65,7 @@ export default class LyricsService extends BaseDbService {
         await this.saveOperation(clone);
     }
     
-    private saveAllLyrics(lyrics: Lyric[]): Promise<void> {
+    private async saveAllLyrics(lyrics: Lyric[]): Promise<void> {
         return this.saveAllOperation(lyrics);
     }
 
@@ -64,3 +73,5 @@ export default class LyricsService extends BaseDbService {
         return this.clear();
     }
 }
+
+export default LyricsService.getInstance()

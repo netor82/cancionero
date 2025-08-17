@@ -3,10 +3,8 @@ import type { Project } from '@/core/interfaces/project'
 import { store } from './store'
 import { store as gStore } from '@/core/store';
 import ProjectSong from './ProjectSong.vue';
-import ProjectService from '@/core/services/project-service';
+import projectService from '@/core/services/project-service';
 import { ref } from 'vue';
-
-const projectService = new ProjectService();
 
 const props = defineProps<{
     project: Project

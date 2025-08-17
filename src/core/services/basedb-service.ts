@@ -13,11 +13,9 @@ const KeyPath : string[] = [
 export default abstract class BaseDbService {
     protected db: IDBDatabase | null = null
     protected storeName: StoreName
-    protected keyPath: string
 
-    constructor(storeName: StoreName, keyPath: string) {
+    constructor(storeName: StoreName) {
         this.storeName = storeName
-        this.keyPath = keyPath
     }
 
     private getStoreName(): string {

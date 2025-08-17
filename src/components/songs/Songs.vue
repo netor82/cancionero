@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { store } from '@/core/store';
+import { store as gStore } from '@/core/store';
 import TagComponent from '@/components/Tag.vue';
 import type { Tag } from '@/core/interfaces/tag';
 import type { Song } from '@/core/interfaces/song';
 import { Sections } from '@/core/enums/sections';
-import { store as searchStore } from './store';
+import { store } from './store';
 import TagSearch from './Tag-Search.vue';
 import TextSearch from './Text-Search.vue';
 import { computed } from 'vue';
@@ -12,28 +12,27 @@ import { computed } from 'vue';
 const items = computed(() => {
   
   // by source
-  if (searchStore.query.length && !isNaN(+searchStore.query)) {
-    const source = parseInt(searchStore.query);
-    return store.songs.filter(song => song.source === source);
+  if (store.query.length && !isNaN(+store.query)) {
+    const source = parseInt(store.query);
+    return gStore.songs.filter(song => song.source === source);
   }
   
-  return store.songs.filter(song => 
+  return gStore.songs.filter(song => 
   // by tag
-  (searchStore.tags.length === 0 || searchStore.tags.every(tag => song.tags.some(t => t === tag.id)))
+  (store.tags.length === 0 || store.tags.every(tag => song.tags.some(t => t === tag.id)))
   // by title
-  && (searchStore.query.length === 0 || song.title.toLowerCase().includes(searchStore.query.toLowerCase()))
+  && (store.query.length === 0 || song.title.toLowerCase().includes(store.query.toLowerCase()))
   )
   
 })
-  
 
 function setSong (song: Song) {
-  store.song = song;
-  store.section.setActive(Sections.Lyrics);
+  gStore.song = song;
+  gStore.section.setActive(Sections.Lyrics);
 };
 
 function addTag(tag: Tag) {
-  searchStore.addTag(tag);
+  store.addTag(tag);
 }
 
 </script>
@@ -47,7 +46,7 @@ function addTag(tag: Tag) {
       <li v-for="song in items" :key="song.id" @click="setSong(song)">
         <span>{{ song.title }}</span> - 
         <TagComponent v-for="tag in song.tags" :id="tag" :tag="null" class="tag" 
-          :callback="addTag" :class="{ active: searchStore.tags.some(t => t.id === tag) }" />
+          :callback="addTag" :class="{ active: store.tags.some(t => t.id === tag) }" />
       </li>
     </ul>
   </div>

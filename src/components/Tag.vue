@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed} from 'vue'
-import TagService from '@/core/services/tag-service';
+import tagService from '@/core/services/tag-service';
 import type { Tag } from '@/core/interfaces/tag';
-
-const tagService = new TagService()
 
 const props = defineProps<{
   id: number

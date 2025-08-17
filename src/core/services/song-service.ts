@@ -3,13 +3,15 @@ import { store } from '../store';
 
 const STORAGE_KEY = 'cancionero_songs'
 
-export default class SongService {
+class SongService {
   items: Song[] = []
-  private static instance : SongService;
+  private static instance: SongService;
 
-  constructor() {
-    if (SongService.instance) return SongService.instance;
-    SongService.instance = this;
+  private constructor() { }
+
+  static getInstance(): SongService {
+    if (!SongService.instance) SongService.instance = new SongService();
+    return SongService.instance;
   }
 
   async load(): Promise<Song[]> {
@@ -21,15 +23,19 @@ export default class SongService {
         this.items = JSON.parse(storedSongs) as Song[]
       }
       else {
-        const songs = await fetchSongs()
-        this.items = songs
-        save(songs)
-        store.setSongs(songs)
+        await this.loadFromServer();
       }
     } catch (error) {
       console.error('Error loading songs from localStorage:', error)
     }
     return this.items
+  }
+
+  async loadFromServer() {
+    const songs = await this.fetchSongs();
+    this.items = songs;
+    this.save(songs);
+    store.setSongs(songs);
   }
 
   unload(): void {
@@ -55,20 +61,22 @@ export default class SongService {
     this.items = this.items.filter(song => song.id !== id)
     return this.items
   }
+
+  private async fetchSongs(): Promise<Song[]> {
+    const response = await fetch('./songs.json');
+    if (!response.ok) {
+      throw new Error('Failed to fetch tags');
+    }
+    return response.json();
+  }
+
+  private save(items: Song[]): void {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    } catch (error) {
+      console.error('Error saving songs to localStorage:', error)
+    }
+  }
 }
 
-async function fetchSongs(): Promise<Song[]> {
-  const response = await fetch('./songs.json');
-  if (!response.ok) {
-    throw new Error('Failed to fetch tags');
-  }
-  return response.json();
-}
-
-function save(items: Song[]): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-  } catch (error) {
-    console.error('Error saving songs to localStorage:', error)
-  }
-}
+export default SongService.getInstance()

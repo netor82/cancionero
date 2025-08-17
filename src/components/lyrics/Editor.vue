@@ -2,9 +2,9 @@
 import type { Lyric, Note } from '@/core/interfaces/lyrics';
 import { ref, watch } from 'vue';
 import Chord from './Chord.vue';
-import LyricsService from '@/core/services/lyrics-service';
-import SongService from '@/core/services/song-service';
-import TagService from '@/core/services/tag-service';
+import lyricsService from '@/core/services/lyrics-service';
+import songService from '@/core/services/song-service';
+import tagService from '@/core/services/tag-service';
 import type { Tag } from '@/core/interfaces/tag';
 import { store } from '@/core/store';
 import TagComponent from '@/components/Tag.vue';
@@ -21,15 +21,13 @@ const options = ref<Tag[]>([]);
 
 function process() {
     if (message.value.length > 0 && !isNaN(+message.value)) {
-        let s = new LyricsService()
-        s.get(+message.value).then(l => {
+        lyricsService.get(+message.value).then(l => {
             lyrics.value = l
             message.value = ''
         });
     } else if (lyrics.value && lyrics.value.id > 0) {
         console.log('Saving lyrics', lyrics.value.id);
-        let s = new LyricsService()
-        s.save(lyrics.value).then(() => {
+        lyricsService.save(lyrics.value).then(() => {
             message.value = ''
             lyrics.value = null
         })
@@ -57,14 +55,11 @@ function setPosition() {
 }
 
 function reset() {
-    //var lyricService = new LyricsService();
-    //lyricService.truncate();
+    lyricsService.truncate();
 
-    var songService = new SongService();
     songService.unload();
 
-    //var tagService = new TagService();
-    //tagService.unload();
+    tagService.unload();
 
     location.reload();
 }

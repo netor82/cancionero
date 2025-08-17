@@ -2,7 +2,7 @@
 import type { Project } from '@/core/interfaces/project';
 import { computed } from 'vue';
 import { store } from '@/core/store';
-import ProjectService from '@/core/services/project-service';
+import projectService from '@/core/services/project-service';
 
 
 const props = defineProps<{
@@ -13,8 +13,6 @@ const props = defineProps<{
 const song = computed(() => {
     return store.songs.find(s => s.id === props.id) || null
 })
-
-const projectService = new ProjectService()
 
 const removeSong = () => {
     props.project.songs = props.project.songs.filter(s => s.id !== song.value!.id)

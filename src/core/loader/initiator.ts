@@ -1,7 +1,7 @@
-import SongService from "../services/song-service"
-import TagService from "../services/tag-service";
-import LyricsService from "../services/lyrics-service";
-import { store } from "../store"
+import songService from "../services/song-service"
+import tagService from "../services/tag-service";
+import lyricsService from "../services/lyrics-service";
+import { store as gStore } from "../store"
 
 export const initiator = {
     async init(): Promise<void> {
@@ -11,18 +11,15 @@ export const initiator = {
 }
 
 async function loadSongs() {
-    const songService = new SongService()
     await songService.load()
-    store.setSongs(songService.items)
+    gStore.setSongs(songService.items)
 }
 
 async function loadTags() {
-    const tagService = new TagService()
     await tagService.load()
 }
 
 async function loadLyrics() {
-    const lyricsService = new LyricsService();
     await lyricsService.initDB().then(() => {
         lyricsService.load()
     })

@@ -3,13 +3,16 @@ import type { Project, ProjectDTO } from '../interfaces/project';
 import { deepToRaw } from '../utils/deepToRaw';
 import BaseDbService, { StoreName } from './basedb-service';
 
-export default class ProjectService extends BaseDbService {
+class ProjectService extends BaseDbService {
     private static instance: ProjectService
 
-    constructor() {
-        super(StoreName.PROJECTS, 'date')
-        if (ProjectService.instance) return ProjectService.instance
-        ProjectService.instance = this
+    private constructor() {
+        super(StoreName.PROJECTS)
+    }
+
+    static getInstance(): ProjectService {
+        if (!ProjectService.instance) ProjectService.instance = new ProjectService()
+        return ProjectService.instance;
     }
 
     initDB(): Promise<void> {
@@ -96,3 +99,5 @@ export default class ProjectService extends BaseDbService {
         }
     }
 }
+
+export default ProjectService.getInstance()
