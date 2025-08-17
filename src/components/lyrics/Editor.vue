@@ -3,8 +3,7 @@ import type { Lyric, Note } from '@/core/interfaces/lyrics';
 import { ref, watch } from 'vue';
 import Chord from './Chord.vue';
 import lyricsService from '@/core/services/lyrics-service';
-import songService from '@/core/services/song-service';
-import tagService from '@/core/services/tag-service';
+import versionService from '@/core/services/version-service';
 import type { Tag } from '@/core/interfaces/tag';
 import { store } from '@/core/store';
 import TagComponent from '@/components/Tag.vue';
@@ -55,13 +54,8 @@ function setPosition() {
 }
 
 function reset() {
-    lyricsService.truncate();
-
-    songService.unload();
-
-    tagService.unload();
-
-    location.reload();
+    localStorage.setItem('cancionero_version', '[0,0,0]');
+    versionService.update()
 }
 
 watch(searchTag, (newValue) => {

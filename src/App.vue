@@ -7,6 +7,7 @@ import { initiator } from './core/loader/initiator';
 import { store } from './core/store';
 import Editor from './components/lyrics/Editor.vue';
 import Projects from './components/projects/Projects.vue';
+import Version from './components/version/Version.vue';
 
 
 onMounted(() => {
@@ -22,7 +23,7 @@ onMounted(() => {
         <button @click="store.section.setActive(Sections.Projects)">📁</button>
         <button @click="store.section.setActive(Sections.Editor)">🖊️</button>
         <button @click="store.section.setActive(Sections.Lyrics)" class="hidden-big">🎵</button>
-        <button >🔁</button>
+        <Version />
       </div>
     </header>
 
