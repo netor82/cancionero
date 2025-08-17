@@ -6,7 +6,6 @@ import lyricsService from '@/core/services/lyrics-service';
 import versionService from '@/core/services/version-service';
 import type { Tag } from '@/core/interfaces/tag';
 import { store } from '@/core/store';
-import TagComponent from '@/components/Tag.vue';
 
 const message = ref('')
 const lyrics = ref<Lyric | null>(null)
@@ -67,26 +66,13 @@ watch(searchTag, (newValue) => {
         : [];
 });
 
-function addTag(tag: Tag) {
-    tags.value.push(tag);
-    searchTag.value = '';
-}
-
-function removeTag(tag: Tag) {
-    tags.value = tags.value.filter(t => t.id !== tag.id);
-}
-
-function copyTags() {
-    const t = JSON.stringify(tags.value.map(t => t.id).sort());
-    navigator.clipboard.writeText(t).then(() => alert('OK'));
-}
-
 </script>
 
 <template>
     <div style="overflow: auto;">
         <div>
-            <input v-model="message" @keyup.enter="process"/>
+            <h3>Editar acordes</h3>
+            <input v-model="message" @keyup.enter="process" placeholder="Id o json"/>
             <button @click="process">🤖</button>
             <button @click="reset">🗑️</button>
         
@@ -109,14 +95,6 @@ function copyTags() {
             </div>
     
         </div>
-    
-        <span class="tag-search">
-            <input type="text" v-model="searchTag" placeholder="Etiqueta" />
-            <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
-            <TagComponent v-if="!options.length" v-for="t in tags" :id="t.id" :tag="t" :callback="removeTag" />
-            <button v-if="tags.length" @click="tags = []">❌</button>
-            <button v-if="tags.length" @click="copyTags()">📋</button>
-        </span>
     </div>
 
     

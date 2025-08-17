@@ -10,7 +10,7 @@ import SongEditor from './components/songs/SongEditor.vue';
 import Projects from './components/projects/Projects.vue';
 import Version from './components/version/Version.vue';
 
-const hostname = window.location.hostname;
+const editMode = window.location.hostname === 'localhost' || window.location.search.indexOf('edit=1') > 0;
 
 onMounted(() => {
     initiator.init();
@@ -23,8 +23,8 @@ onMounted(() => {
       <div class="wrapper">
         <button @click="store.section.setActive(Sections.Songs)">🔍</button>
         <button @click="store.section.setActive(Sections.Projects)">📁</button>
-        <button @click="store.section.setActive(Sections.Editor)" v-if="hostname === 'localhost'">🖊️</button>
-        <button @click="store.section.setActive(Sections.SongEditor)" v-if="hostname === 'localhost'">📝</button>
+        <button @click="store.section.setActive(Sections.Editor)" v-if="editMode">🖊️</button>
+        <button @click="store.section.setActive(Sections.SongEditor)" v-if="editMode">📝</button>
         <button @click="store.section.setActive(Sections.Lyrics)" class="hidden-big">🎵</button>
         <Version />
       </div>

@@ -64,6 +64,7 @@ function printSongs() {
 <template>
     <div>
         <div>
+            <h3>Agregar etiqueta a las canciones</h3>
             <span class="tag-search">
                 <input type="text" v-model="searchTag" placeholder="Etiqueta" />
                 <TagComponent v-for="t in options" :id="t.id" :tag="t" :callback="addTag" />
