@@ -31,8 +31,13 @@ const selectSong = () => {
 </script>
 
 <template>
-    <li @click.stop="selectSong()">
-        <button @click.stop="removeSong()">❌</button>
-        {{ song?.title }}
+    <li @click.stop="selectSong()" class="controls">
+        <div>
+            <button @click.stop="removeSong()">❌</button>
+            {{ song?.title }}
+        </div>
+        <div>
+            <slot name="controls" />
+        </div>
     </li>
 </template>

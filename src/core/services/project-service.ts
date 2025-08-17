@@ -36,6 +36,15 @@ export default class ProjectService extends BaseDbService {
         await this.saveOperation(clone)
     }
 
+    async clone(project: Project): Promise<Project> {
+        let clone = deepToRaw(project)
+        clone.date = new Date()
+        clone.id = clone.date.getTime()
+        clone.title += '*'
+        await this.saveOperation(clone);
+        return clone;
+    }
+
     async delete(project: Project): Promise<void> {
         await this.deleteOperation(project.id);
     }

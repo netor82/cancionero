@@ -37,7 +37,7 @@ const handleFileUpload = (event: Event) => {
     
     <div v-if="!gStore.project">
       <div class="controls">
-        <button @click="showUpload = !showUpload">{{ showUpload ? '⬅️' : '💎' }} </button>
+        <button @click="showUpload = !showUpload" title="Importar">{{ showUpload ? '🔙' : '📤' }} </button>
         <input v-if="showUpload" type="file" ref="file" accept=".json" @change="handleFileUpload" />
   
         <AddProject v-if="!showUpload" />
@@ -55,7 +55,7 @@ const handleFileUpload = (event: Event) => {
       
       <Project :project="gStore.project">
         <template #controls>
-          <button @click="gStore.project = null">⬅️</button>
+          <button @click="gStore.project = null">🔙</button>
         </template>
       </Project>
     </div>

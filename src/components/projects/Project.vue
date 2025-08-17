@@ -30,22 +30,46 @@ const confirmDelete = async () => {
     }
 };
 
+const cloneProject = async () => {
+    await projectService.clone(props.project).then((created) => {
+        store.projects.unshift(created);
+        gStore.project = created;
+    });
+};
+
+
+const swapSong = (indexA: number, indexB: number) => {
+    const temp = props.project.songs[indexA];
+    props.project.songs[indexA] = props.project.songs[indexB];
+    props.project.songs[indexB] = temp;
+    projectService.save(props.project).catch(error => {
+        console.error('Error saving project:', error);
+    });
+};
+
 </script>
 
 <template>
     <div class="controls">
         <slot name="controls" />
         <div class="inline">
-            <button @click="confirmDelete">❌</button>
-            <button @click="projectService.export(props.project)">💎</button>
+            <button @click="cloneProject" title="Clonar">🈁</button>
+            <button @click="confirmDelete" title="Eliminar">❌</button>
+            <button @click="projectService.export(props.project)" title="Exportar">⬇️</button>
         </div>
     </div>
     <div class="project">
-        <input type="text" v-model="props.project.title" @focusin="originalTitle = props.project.title" @focusout="saveTitle()" />
+        <input type="text" v-model="props.project.title" @focusin="originalTitle = props.project.title"
+            @focusout="saveTitle()" />
         <p class="date">{{ store.dateFormat(props.project.date) }}</p>
 
         <ul>
-            <ProjectSong v-for="s in props.project.songs" :key="s.id" :project="props.project" :id="s.id" />
+            <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id" :project="props.project" :id="s.id">
+                <template #controls>
+                    <button @click="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
+                    <button @click="swapSong(i, i + 1)" :class="{ invisible: i >= props.project.songs.length - 1 }">⬇️</button>
+                </template>
+            </ProjectSong>
         </ul>
     </div>
 </template>
@@ -58,6 +82,7 @@ input {
     padding: 0;
     width: 100%;
 }
+
 input:focus {
     background: initial;
     border: initial;
