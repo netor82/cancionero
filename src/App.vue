@@ -6,6 +6,7 @@ import { onMounted } from 'vue'
 import { initiator } from './core/loader/initiator';
 import { store } from './core/store';
 import Editor from './components/lyrics/Editor.vue';
+import SongEditor from './components/songs/SongEditor.vue';
 import Projects from './components/projects/Projects.vue';
 import Version from './components/version/Version.vue';
 
@@ -23,6 +24,7 @@ onMounted(() => {
         <button @click="store.section.setActive(Sections.Songs)">🔍</button>
         <button @click="store.section.setActive(Sections.Projects)">📁</button>
         <button @click="store.section.setActive(Sections.Editor)" v-if="hostname === 'localhost'">🖊️</button>
+        <button @click="store.section.setActive(Sections.SongEditor)" v-if="hostname === 'localhost'">📝</button>
         <button @click="store.section.setActive(Sections.Lyrics)" class="hidden-big">🎵</button>
         <Version />
       </div>
@@ -47,6 +49,12 @@ onMounted(() => {
         v-if="store.section.last === Sections.Editor">
         <div class="wrapper">
           <Editor />
+        </div>
+      </section>
+      <section :class="{ active: store.section.active === Sections.SongEditor }"
+        v-if="store.section.last === Sections.SongEditor">
+        <div class="wrapper">
+          <SongEditor />
         </div>
       </section>
 

@@ -2,5 +2,6 @@ export enum Sections {
     Songs,
     Projects,
     Lyrics,
-    Editor
+    Editor,
+    SongEditor
 }

@@ -84,13 +84,6 @@ function copyTags() {
 </script>
 
 <template>
-    <div class="ruler" style="left:12ch">1</div>
-    <div class="ruler" style="left:22ch">2</div>
-    <div class="ruler" style="left:32ch">3</div>
-    <div class="ruler" style="left:42ch">4</div>
-    <div class="ruler" style="left:52ch">5</div>
-    <div class="ruler" style="left:62ch">6</div>
-
     <input v-model="message" @keyup.enter="process"/>
     <button @click="process">🤖</button>
     <button @click="reset">🗑️</button>
@@ -98,7 +91,14 @@ function copyTags() {
     <input type="number" v-model="valor" @input="setPosition" ref="myInput" />
     {{ lyrics?.id }}
 
-    <div v-if="lyrics" class="lyrics-content">
+    
+    <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;">
+        <div class="ruler" style="left:10ch">1</div>
+        <div class="ruler" style="left:20ch">2</div>
+        <div class="ruler" style="left:30ch">3</div>
+        <div class="ruler" style="left:40ch">4</div>
+        <div class="ruler" style="left:50ch">5</div>
+        <div class="ruler" style="left:60ch">6</div>
         <div v-for="(notes, index) in lyrics.notes" :key="index">
             <p class="chords">
                 <Chord v-for="chord in notes" :chord="chord" @click="nota = chord" :transpose="0" />&nbsp;
@@ -123,8 +123,7 @@ function copyTags() {
     font-family: 'Courier New', Courier, monospace;
     border-left: 1px dotted var(--color-border);
     position: absolute;
-    top: 105px;
-    bottom: 35px;
-    width: 1px;
+    top: -15px;
+    bottom: 0px;
 }
 </style>
