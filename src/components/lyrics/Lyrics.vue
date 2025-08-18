@@ -71,7 +71,7 @@ const changeTranspose = (amount: number) => {
         <p class="chords" v-if="store.noteConvention !== 2">
           <Chord v-for="chord in notes" :chord="chord" :transpose="transpose" />&nbsp;
         </p>
-        <p>{{ lyrics.text[index] }}&nbsp;</p>
+        <pre>{{ lyrics.text[index] }}&nbsp;</pre>
       </div>
 
     </div>
@@ -90,7 +90,7 @@ const changeTranspose = (amount: number) => {
 
 .lyrics-content {
   margin-top: 1rem;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: monospace, 'Courier New', Courier;
 }
 .lyrics-content p {
   text-wrap: nowrap;

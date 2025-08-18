@@ -18,13 +18,15 @@ class LyricsService extends BaseDbService {
         return LyricsService.instance;
     }
 
-    initDB(): Promise<void> {
-        return super.initDB();
-    }
-
     get(id: number): Promise<Lyric> {
         return this.readOnlyOperation<Lyric>((objectStore) => {
             return objectStore.get(id);
+        });
+    }
+
+    getAll(): Promise<Lyric[]> {
+        return this.readOnlyOperation<Lyric[]>((objectStore) => {
+            return objectStore.getAll();
         });
     }
 

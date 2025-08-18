@@ -49,6 +49,11 @@ class SongService {
     return this.items
   }
 
+  get(id: number | null): Song | undefined {
+    return (id == null) ? undefined
+    : this.items.find(song => song.id === id);
+  }
+
   update(updatedSong: Song): Song[] {
     const index = this.items.findIndex(song => song.id === updatedSong.id)
     if (index !== -1) {

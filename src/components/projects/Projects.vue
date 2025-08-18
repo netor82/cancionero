@@ -8,10 +8,8 @@ import Project from './Project.vue';
 const file = ref<File | null>(null)
 const showUpload = ref(false)
 
-onMounted(() => {
-  store.service.initDB().then(async () => {
-    store.projects = await store.service.getAll()
-  })
+onMounted(async () => {
+  store.projects = await store.service.getAll()
 })
 
 const data = computed(() => store.projects.sort((a, b) => {

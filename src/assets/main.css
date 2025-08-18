@@ -79,7 +79,7 @@ main section .wrapper, main section .wrapper > *{
 }
 
 .vertical-scroll {
-  overflow: scroll;
+  overflow: auto;
 }
 
 

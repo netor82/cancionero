@@ -15,10 +15,6 @@ class ProjectService extends BaseDbService {
         return ProjectService.instance;
     }
 
-    initDB(): Promise<void> {
-        return super.initDB()
-    }
-
     async add(title: string): Promise<Project> {
         const date = new Date()
         var project = { id: date.getTime(), title, date, songs:[] } as Project;

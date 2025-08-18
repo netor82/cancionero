@@ -11,19 +11,26 @@ const KeyPath : string[] = [
 ]
 
 export default abstract class BaseDbService {
-    protected db: IDBDatabase | null = null
+    protected static db: IDBDatabase | null = null
     protected storeName: StoreName
 
     constructor(storeName: StoreName) {
         this.storeName = storeName
+        this.initDB()
     }
 
     private getStoreName(): string {
         return KeyPath[this.storeName];
     }
 
-    protected initDB(): Promise<void> {
+    private initDB(): Promise<void> {
         return new Promise((resolve, reject) => {
+
+            if (BaseDbService.db) {
+                resolve();
+                return;
+            }
+
             const request = indexedDB.open(_const.DB_NAME, _const.DB_VERSION)
 
             request.onerror = () => {
@@ -31,7 +38,7 @@ export default abstract class BaseDbService {
                 console.error('Error opening IndexedDB:', request.error)
             }
             request.onsuccess = () => {
-                this.db = request.result
+                BaseDbService.db = request.result
                 resolve()
             };
 
@@ -50,10 +57,10 @@ export default abstract class BaseDbService {
      
 
     protected readOnlyOperation<T>(operation: (objectStore: IDBObjectStore) => IDBRequest<T>): Promise<T> {
-        if (!this.db) throw new Error('Database not initialized');
+        if (!BaseDbService.db) throw new Error('Database not initialized');
 
         return new Promise((resolve, reject) => {
-            const transaction = this.db!.transaction(this.getStoreName(), 'readonly');
+            const transaction = BaseDbService.db!.transaction(this.getStoreName(), 'readonly');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             const request = operation(objectStore);
@@ -64,9 +71,9 @@ export default abstract class BaseDbService {
     }
 
     protected async clear(): Promise<void> {
-        if (!this.db) throw new Error('Database not initialized');
+        if (!BaseDbService.db) throw new Error('Database not initialized');
 
-        const transaction = this.db.transaction([this.getStoreName()], 'readwrite');
+        const transaction = BaseDbService.db.transaction([this.getStoreName()], 'readwrite');
         const objectStore = transaction.objectStore(this.getStoreName());
         const request = objectStore.clear();
 
@@ -81,10 +88,10 @@ export default abstract class BaseDbService {
     }
 
     protected saveAllOperation<T>(value: T[]): Promise<void> {
-        if (!this.db) throw new Error('Database not initialized');
+        if (!BaseDbService.db) throw new Error('Database not initialized');
 
         return new Promise((resolve, reject) => {
-            const transaction = this.db!.transaction([this.getStoreName()], 'readwrite');
+            const transaction = BaseDbService.db!.transaction([this.getStoreName()], 'readwrite');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             for (const item of value) {
@@ -97,10 +104,10 @@ export default abstract class BaseDbService {
     }
 
     protected deleteOperation<T>(id: number): Promise<void> {
-        if (!this.db) throw new Error('Database not initialized');
+        if (!BaseDbService.db) throw new Error('Database not initialized');
 
         return new Promise((resolve, reject) => {
-            const transaction = this.db!.transaction([this.getStoreName()], 'readwrite');
+            const transaction = BaseDbService.db!.transaction([this.getStoreName()], 'readwrite');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             const request = objectStore.delete(id);

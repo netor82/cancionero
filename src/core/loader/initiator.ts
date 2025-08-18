@@ -20,7 +20,5 @@ async function loadTags() {
 }
 
 async function loadLyrics() {
-    await lyricsService.initDB().then(() => {
-        lyricsService.load()
-    })
+    await lyricsService.load()
 }
