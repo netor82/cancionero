@@ -51,9 +51,9 @@ const swapSong = (indexA: number, indexB: number) => {
     <div class="controls">
         <slot name="controls" />
         <div class="inline">
-            <button @click="cloneProject" title="Clonar">🈁</button>
-            <button @click="confirmDelete" title="Eliminar">❌</button>
-            <button @click="projectService.export(props.project)" title="Exportar">⬇️</button>
+            <button @click="cloneProject">🈁Clonar</button>
+            <button @click="confirmDelete">❌Borrar</button>
+            <button @click="projectService.export(props.project)">⬇️Descargar</button>
         </div>
     </div>
     <div class="project">

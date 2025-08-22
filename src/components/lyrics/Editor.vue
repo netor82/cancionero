@@ -45,7 +45,7 @@ function loadLyrics() {
 function saveLyric() {
     if (!lyrics.value) return;
     lyricsService.save(lyrics.value).then(() => {
-        message.value = `🎉 Lyrics saved successfully!`
+        message.value = `🎉 ¡Letra guardada!`
     }).catch((error) => {
         message.value = `Error: ${error.message}`
     });
@@ -161,6 +161,8 @@ const processNotes = (line: string) : Note[] => {
     // split line by any whitespace and return array of notes
     const parts = line.split(/\s+/)
     for (let i = 0; i < parts.length; i++) {
+        if(!parts[i].trim()) continue;
+
         const note = fromNameToNote(parts[i], i)
         notes.push(note)
     }
@@ -242,12 +244,12 @@ function exportLyrics() {
 
         <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;font-size:22px" @mouseup.left.prevent="onMouseUp">
             <button @click="saveLyric">💾</button>
-            <div class="ruler" style="left:10ch">1</div>
-            <div class="ruler" style="left:20ch">2</div>
-            <div class="ruler" style="left:30ch">3</div>
-            <div class="ruler" style="left:40ch">4</div>
-            <div class="ruler" style="left:50ch">5</div>
-            <div class="ruler" style="left:60ch">6</div>
+            <div class="ruler" style="left:10ch">10</div>
+            <div class="ruler" style="left:20ch">20</div>
+            <div class="ruler" style="left:30ch">30</div>
+            <div class="ruler" style="left:40ch">40</div>
+            <div class="ruler" style="left:50ch">50</div>
+            <div class="ruler" style="left:60ch">60</div>
             <div v-for="(notes, index) in lyrics.notes" :key="index">
                 <p class="chords">
                     <Chord v-for="chord in notes" :chord="chord" :transpose="0" 
@@ -264,7 +266,7 @@ function exportLyrics() {
 
 <style>
 .ruler {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace, 'Courier New', Courier;
     border-left: 1px dotted var(--color-border);
     position: absolute;
     top: -15px;

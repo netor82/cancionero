@@ -12,6 +12,7 @@ button{
   font-size: large;
   border: 0;
   padding: 4px 8px;
+  color: var(--color-text);
 }
 
 input {

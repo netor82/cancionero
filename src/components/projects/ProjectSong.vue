@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Project } from '@/core/interfaces/project';
 import { computed } from 'vue';
-import { store } from '@/core/store';
+import { store as gStore } from '@/core/store';
 import projectService from '@/core/services/project-service';
+import { Sections } from '@/core/enums/sections';
 
 
 const props = defineProps<{
@@ -11,7 +12,7 @@ const props = defineProps<{
 }>()
 
 const song = computed(() => {
-    return store.songs.find(s => s.id === props.id) || null
+    return gStore.songs.find(s => s.id === props.id) || null
 })
 
 const removeSong = () => {
@@ -23,7 +24,8 @@ const removeSong = () => {
 }
 
 const selectSong = () => {
-    store.song = song.value
+    gStore.song = song.value
+    gStore.section.setActive(Sections.Lyrics);
 }
 
 </script>

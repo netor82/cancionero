@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import projectService from '@/core/services/project-service'
 import { store } from '@/core/store'
-import { computed, toRaw } from 'vue'
+import { computed } from 'vue'
 
 const project = computed(() => store.project)
 const added = computed(() => store.projectHas(store.song!.id))
