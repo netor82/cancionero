@@ -7,7 +7,7 @@ import projectService from '@/core/services/project-service'
 import SongInfo from './SongInfo.vue'
 import Chord from './Chord.vue'
 
-const message = ref('')
+const message = ref('Seleccione una canción en el Índice')
 const lyrics = ref<Lyric | null>(null)
 
 watch(() => store.song, (newIndex) => {
@@ -18,7 +18,7 @@ watch(() => store.song, (newIndex) => {
         message.value = ''
         lyrics.value = value
       } else {
-        message.value = `No lyrics found for song ${newIndex.id}`
+        message.value = `No hay letras para la canción ${newIndex.id}`
         lyrics.value = null
       }
     }).catch(error => {
@@ -40,15 +40,22 @@ const changeTranspose = (amount: number) => {
   if (store.project) {
     const songInProject = store.project.songs.find(s => s.id === store.song?.id)
     if (songInProject) {
-      songInProject.transpose += amount
+      songInProject.transpose = calculateTranspose(songInProject.transpose, amount)
       projectService.save(store.project).catch(error => {
         console.error('Error updating project:', error)
       })
       return // exists as change was done to transpose in project
     }
   }
-  store.transpose += amount
+  store.transpose = calculateTranspose(store.transpose, amount)
 };
+
+function calculateTranspose(original: number, delta:number): number {
+  original += delta
+  if  (original < 0) original = 11
+  if  (original > 11) original = 0
+  return original
+}
 </script>
 
 <template>
@@ -58,8 +65,7 @@ const changeTranspose = (amount: number) => {
 
     <div v-if="lyrics" class="lyrics-transponse">
       <div v-if="store.noteConvention !== 2" class="inline">
-        <button v-if="transpose > 0" @click="changeTranspose(-1)">⬇️</button>
-        <span>{{ transpose }}</span>
+        <button @click="changeTranspose(-1)">⬇️</button>
         <button @click="changeTranspose(1)">⬆️</button>
       </div>
       <button @click="store.changeNoteConvention()">

@@ -16,17 +16,21 @@ const editMode = localhost || window.location.search.indexOf('edit=1') > 0;
 onMounted(() => {
     initiator.init();
 })
+
+function active(s: Sections):void {
+    store.section.setActive(s);
+}
 </script>
 
 <template>
   <div class="app-layout">
     <header>
       <div class="wrapper">
-        <button @click="store.section.setActive(Sections.Songs)">🔍Índice</button>
-        <button @click="store.section.setActive(Sections.Projects)">📁Listas</button>
-        <button @click="store.section.setActive(Sections.Editor)" v-if="editMode">🖊️Editor</button>
-        <button @click="store.section.setActive(Sections.SongEditor)" v-if="localhost">📝</button>
-        <button @click="store.section.setActive(Sections.Lyrics)" class="hidden-big">🎵Letras</button>
+        <button @click="active(Sections.Songs)" :class="{active: store.section.active === Sections.Songs}">🔍Índice</button>
+        <button @click="active(Sections.Projects)" :class="{active: store.section.active === Sections.Projects}">📁Listas</button>
+        <button @click="active(Sections.Editor)" v-if="editMode" :class="{active: store.section.active === Sections.Editor}">🖊️Editor</button>
+        <button @click="active(Sections.SongEditor)" v-if="localhost" :class="{active: store.section.active === Sections.SongEditor}">📝</button>
+        <button @click="active(Sections.Lyrics)" class="hidden-big" :class="{active: store.section.active === Sections.Lyrics}">🎵Letras</button>
         <Version />
       </div>
     </header>

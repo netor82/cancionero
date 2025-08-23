@@ -13,6 +13,12 @@ button{
   border: 0;
   padding: 4px 8px;
   color: var(--color-text);
+  margin: 0 2px;
+}
+
+button.active {
+  background: var(--color-hover);
+  border-radius: 5px;
 }
 
 input {

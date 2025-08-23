@@ -244,6 +244,9 @@ function exportLyrics() {
 
         <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;font-size:22px" @mouseup.left.prevent="onMouseUp">
             <button @click="saveLyric">💾</button>
+            <button @click="store.changeNoteConvention()">
+                {{ store.noteConvention === 2 ? '🎵' : (store.noteConvention ? '⭕' : '🎶') }}
+            </button>
             <div class="ruler" style="left:10ch">10</div>
             <div class="ruler" style="left:20ch">20</div>
             <div class="ruler" style="left:30ch">30</div>
