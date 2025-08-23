@@ -64,8 +64,8 @@ const swapSong = (indexA: number, indexB: number) => {
         <ul>
             <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id" :project="props.project" :id="s.id">
                 <template #controls>
-                    <button @click="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
-                    <button @click="swapSong(i, i + 1)" :class="{ invisible: i >= props.project.songs.length - 1 }">⬇️</button>
+                    <button @click.stop="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
+                    <button @click.stop="swapSong(i, i + 1)" :class="{ invisible: i >= props.project.songs.length - 1 }">⬇️</button>
                 </template>
             </ProjectSong>
         </ul>

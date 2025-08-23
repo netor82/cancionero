@@ -14,7 +14,7 @@ const message = ref('')
 const lyricIdInput = ref('')
 const song = computed<Song | undefined>(() => {
     return songService.get(lyrics.value?.id || null)
-} )
+})
 const lyrics = ref<Lyric | null>(null)
 const nota = ref<Note | null>(null)
 const positionValue = ref(0)
@@ -31,7 +31,7 @@ let mouseXInitialPosition = -1;
 function loadLyrics() {
     if (lyricIdInput.value.length > 0 && !isNaN(+lyricIdInput.value)) {
         lyricsService.get(+lyricIdInput.value).then(l => {
-            if (l!= null) {
+            if (l != null) {
                 message.value = ''
                 lyrics.value = l
                 lyricIdInput.value = ''
@@ -73,6 +73,7 @@ function reset() {
 function clear() {
     lyrics.value = null;
     nota.value = null;
+    message.value = '';
 }
 
 watch(searchTag, (newValue) => {
@@ -84,19 +85,17 @@ watch(searchTag, (newValue) => {
         : [];
 });
 
-function onMouseDown(event: MouseEvent, chord:Note) {
+function onMouseDown(event: MouseEvent, chord: Note) {
     mouseXInitialPosition = event.clientX;
     nota.value = chord;
-    console.log('Mouse down at', mouseXInitialPosition);
 }
 
 function onMouseUp(event: MouseEvent) {
     if (mouseXInitialPosition === -1) return; // No initial position set
 
     const deltaX = event.clientX - mouseXInitialPosition;
-    console.log('Mouse up at', event.clientX, 'Delta:', deltaX);
     if (nota.value && Math.abs(deltaX) > 10) { // Threshold to avoid accidental clicks
-        nota.value.position += Math.ceil(deltaX / 14) // Adjust position based on mouse movement
+        nota.value.position += Math.ceil(deltaX / 12) // Adjust position based on mouse movement
         positionValue.value = nota.value.position
     }
     mouseXInitialPosition = -1; // Reset after processing
@@ -104,7 +103,7 @@ function onMouseUp(event: MouseEvent) {
 
 function processOriginalText() {
     if (originalText.value != null && originalText.value.value.trim()) {
-        if(parseFromTextToLyric(originalText.value.value.trim())) {
+        if (parseFromTextToLyric(originalText.value.value.trim())) {
             originalText.value.value = ''
         }
     } else {
@@ -155,38 +154,42 @@ const fromNameToNote = (name: string, index: number) => {
     };
 }
 
-const processNotes = (line: string) : Note[] => {
+const processNotes = (line: string, lyricsLineLength: number): Note[] => {
     const notes = []
 
     // split line by any whitespace and return array of notes
     const parts = line.split(/\s+/)
+    const positionFactor = lyricsLineLength / parts.length
     for (let i = 0; i < parts.length; i++) {
-        if(!parts[i].trim()) continue;
+        if (!parts[i].trim()) continue;
 
         const note = fromNameToNote(parts[i], i)
+        note.position = (i + 1 == parts.length)
+            ? lyricsLineLength - 4
+            : Math.floor(i * positionFactor)
         notes.push(note)
     }
 
     return notes
 }
 
-function parseFromTextToLyric(text:string):boolean {
+function parseFromTextToLyric(text: string): boolean {
     // split text into lines
     const lines = text.split('\n')
     let firstLine = lines[0].trim()
 
-    if(firstLine === "352B") firstLine = "374";
-    if(firstLine === "352C") firstLine = "375";
-    if(firstLine === "187B") firstLine = "376";
-    if(firstLine === "111B") firstLine = "377";
+    if (firstLine === "352B") firstLine = "374";
+    if (firstLine === "352C") firstLine = "375";
+    if (firstLine === "187B") firstLine = "376";
+    if (firstLine === "111B") firstLine = "377";
 
     const id = Number(firstLine.trim())
-    if (isNaN(id) || id == 0){
+    if (isNaN(id) || id == 0) {
         message.value = "Me falta el id"
         return false
     }
 
-    let lyricLines = [] , lyricNotes = [] as Note[][]
+    let lyricLines = [], lyricNotes = [] as Note[][]
 
     for (let i = 1; i < lines.length; i++) {
         if (!lines[i].trim()) {
@@ -196,7 +199,7 @@ function parseFromTextToLyric(text:string):boolean {
         }
 
         lyricLines.push(lines[i + 1])
-        lyricNotes.push(processNotes(lines[i]))
+        lyricNotes.push(processNotes(lines[i], lines[i + 1].length))
         i++
     }
     lyrics.value = {
@@ -236,13 +239,14 @@ function exportLyrics() {
             <br /><br />
             <div v-if="!lyrics">
                 <textarea ref="originalText" placeholder="Pegar texto aquí"
-                    style="height: 300px;width: 100%;"></textarea>
+                    style="height: 450px;width: 100%;"></textarea>
                 <button @click="processOriginalText">🤖</button>
                 <button @click="exportLyrics">📤</button>
             </div>
         </div>
 
-        <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;font-size:22px" @mouseup.left.prevent="onMouseUp">
+        <div v-if="lyrics" class="lyrics-content" style="position:relative;padding-top: 10px;font-size:22px"
+            @mouseup.left.prevent="onMouseUp">
             <button @click="saveLyric">💾</button>
             <button @click="store.changeNoteConvention()">
                 {{ store.noteConvention === 2 ? '🎵' : (store.noteConvention ? '⭕' : '🎶') }}
@@ -255,8 +259,8 @@ function exportLyrics() {
             <div class="ruler" style="left:60ch">60</div>
             <div v-for="(notes, index) in lyrics.notes" :key="index">
                 <p class="chords">
-                    <Chord v-for="chord in notes" :chord="chord" :transpose="0" 
-                    @mousedown.left.prevent="onMouseDown($event, chord)" />&nbsp;
+                    <Chord v-for="chord in notes" :chord="chord" :transpose="0"
+                        @mousedown.left.prevent="onMouseDown($event, chord)" />&nbsp;
                 </p>
                 <pre>{{ lyrics.text[index] }}</pre>
             </div>
@@ -275,7 +279,8 @@ function exportLyrics() {
     top: -15px;
     bottom: 0px;
 }
-#editor .chord{
+
+#editor .chord {
     cursor: pointer;
 }
 </style>
