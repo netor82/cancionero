@@ -8,8 +8,8 @@ export const store = reactive({
     song: null as Song | null,
     songs: [] as Song[],
     project: null as Project | null,
-    projectHas(songId: number) : boolean {
-        return this.project?.songs.some(song => song.id === songId) ?? false
+    projectHas(songId: number) : number {
+        return this.project?.songs.findIndex(song => song.id === songId) ?? -1
     },
     setSongs(songs: Song[]) {
         this.songs = songs

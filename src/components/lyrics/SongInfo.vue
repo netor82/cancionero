@@ -21,7 +21,7 @@ const song = computed(() => store.song);
   </div>
 </template>
 
-<style scoped>
+<style>
 .song-info {
   border: 1px solid var(--color-border);
   padding: 1rem;
