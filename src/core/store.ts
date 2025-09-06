@@ -21,8 +21,8 @@ export const store = reactive({
     },
     tags: [] as Tag[],
     section: {
-        active: Sections.Songs,
-        last: Sections.Songs,
+        active: Sections.Projects,
+        last: Sections.Projects,
         setActive(newSection: Sections) {
             this.active = newSection
             if (newSection !== Sections.Lyrics) {

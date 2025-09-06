@@ -22,9 +22,20 @@ const noteName = computed(() => {
     </span>
 </template>
 
-<style scoped>
+<style>
 .chord {
     position: absolute;
     left: 0;
+    color: var(--color-green);
+    background-color: var(--color-background-soft);
+    padding-bottom: 12px;
+    border-bottom-right-radius: 30px;
+    border-left: 1px solid var(--color-border);
+    border-top-right-radius: 15px;
+}
+
+.lyrics-content pre {
+    position: relative;
+    z-index: 10;
 }
 </style>

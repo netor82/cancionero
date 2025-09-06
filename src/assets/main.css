@@ -21,10 +21,14 @@ button.active {
   border-radius: 5px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+}
+
 input {
   background-color: var(--color-background-soft);
   border: 1px solid var(--color-border);
-  color: var(--color-text);
+  color: var(--color-heading);
   padding: 6px 8px;
   border-radius: 8px;
   transition: 0.4s;
@@ -89,6 +93,15 @@ main section .wrapper, main section .wrapper > *{
   overflow: auto;
 }
 
+.vertical-center{ 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
 
 footer {
   border-top: 1px solid var(--color-border);
@@ -114,11 +127,16 @@ footer .wrapper{
   display: inline-block;
 }
 
+a {
+  cursor: pointer;
+}
+
 a, .green {
   text-decoration: none;
   color: var(--color-green);
   transition: 0.4s;
   padding: 3px;
+  border-radius: 8px;
 }
 
 .tag {

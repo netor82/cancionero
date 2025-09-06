@@ -32,15 +32,12 @@ const handleFileUpload = (event: Event) => {
 
 <template>
   <div class="projects">
-    
     <div v-if="!gStore.project">
       <div class="controls">
         <button @click="showUpload = !showUpload" title="Importar">{{ showUpload ? '🔙' : '📤Importar' }} </button>
         <input v-if="showUpload" type="file" ref="file" accept=".json" @change="handleFileUpload" />
-  
         <AddProject v-if="!showUpload" />
       </div>
-      
       <ul>
         <li v-for="project in data" @click="gStore.project = project">
           <span class="title">{{ project.title }}</span>
@@ -50,12 +47,17 @@ const handleFileUpload = (event: Event) => {
     </div>
 
     <div v-else>
-      
       <Project :project="gStore.project">
         <template #controls>
           <button @click="gStore.project = null">🔙Volver</button>
         </template>
       </Project>
+    </div>
+
+    <div v-if="data.length === 0" class="vertical-center">
+      <p>😅</p>
+      <p>No tienes listas.</p>
+      <p>Puedes crear una, poniendo el nombre arriba o importar una existente.</p>
     </div>
 
   </div>
@@ -67,5 +69,4 @@ const handleFileUpload = (event: Event) => {
   color: var(--color-text);
   margin-left: 1em;
 }
-
 </style>

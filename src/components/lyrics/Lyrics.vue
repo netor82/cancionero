@@ -61,7 +61,7 @@ function calculateTranspose(original: number, delta:number): number {
 <template>
   <div class="lyrics vertical-scroll">
     <SongInfo />
-    <p v-if="message">{{ message }}</p>
+    <p v-if="message" class="vertical-center">{{ message }}</p>
 
     <div v-if="lyrics" class="lyrics-transponse">
       <div v-if="store.noteConvention !== 2" class="inline">
@@ -85,6 +85,10 @@ function calculateTranspose(original: number, delta:number): number {
 
 </template>
 <style>
+.lyrics button {
+  padding: 4px 0;
+  margin: 0;
+}
 .lyrics-transponse {
   display: flex;
   justify-content: right;

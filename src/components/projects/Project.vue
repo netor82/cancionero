@@ -5,6 +5,7 @@ import { store as gStore } from '@/core/store';
 import ProjectSong from './ProjectSong.vue';
 import projectService from '@/core/services/project-service';
 import { ref } from 'vue';
+import { Sections } from '@/core/enums/sections';
 
 const props = defineProps<{
     project: Project
@@ -65,10 +66,18 @@ const swapSong = (indexA: number, indexB: number) => {
             <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id" :project="props.project" :id="s.id">
                 <template #controls>
                     <button @click.stop="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
-                    <button @click.stop="swapSong(i, i + 1)" :class="{ invisible: i >= props.project.songs.length - 1 }">⬇️</button>
+                    <button @click.stop="swapSong(i, i + 1)"
+                        :class="{ invisible: i >= props.project.songs.length - 1 }">⬇️</button>
                 </template>
             </ProjectSong>
         </ul>
+
+        <div v-if="props.project.songs.length === 0" class="vertical-center">
+            <p>Para cambiar el título de la lista, puedes dar doble clic sobre el título.</p>
+            <p>😅</p>
+            <p>No tienes nada en esta lista.</p>
+            <p>Ve al <a @click.stop="gStore.section.setActive(Sections.Songs)">Índice</a>, entra en la letra de una canción y añádela a esta lista.</p>
+        </div>
     </div>
 </template>
 
