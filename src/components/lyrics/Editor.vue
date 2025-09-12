@@ -212,7 +212,8 @@ function parseFromTextToLyric(text: string): boolean {
 
 function exportLyrics() {
     lyricsService.getAll().then((allLyrics) => {
-        const blob = new Blob([JSON.stringify(allLyrics)], { type: 'application/json' })
+        const blobParts = [ "[\n", ...allLyrics.map(x => JSON.stringify(x) + ",\n"),"]" ]
+        const blob = new Blob(blobParts, { type: 'application/json' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
@@ -230,7 +231,7 @@ function exportLyrics() {
             <h3>Editar acordes</h3>
             <input v-model="lyricIdInput" @keyup.enter="loadLyrics" placeholder="Id existente + enter" />
             <button @click="reset" v-if="isLocalHost">🗑️</button>
-            <input v-if="nota !== null" type="number" v-model="positionValue" @input="setPosition" ref="notaPosition" />
+            <input type="number" v-model="positionValue" @input="setPosition" ref="notaPosition" />
             <div v-if="lyrics">
                 <span>Id: {{ lyrics?.id }} - {{ song?.title }}</span>
                 <button @click="clear">🔙</button>
