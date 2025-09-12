@@ -19,6 +19,7 @@ const song = computed(() => store.song);
     </div>
     <SongControl />
   </div>
+  <p v-if="song && song.comments">{{ song.comments }}</p>
 </template>
 
 <style>
