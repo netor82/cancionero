@@ -66,6 +66,9 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+*::before,
+*::after {
   font-weight: normal;
 }
 

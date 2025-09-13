@@ -88,7 +88,7 @@
 {"id":87,"title":"Escucha, Señor, mi oración","source":87,"tags":[41,43]},
 {"id":88,"title":"Estoy pensando en Dios","source":88,"tags":[41,4,33,32,15,16]},
 {"id":89,"title":"Fue el Señor quien te hizo así","source":89,"comments":"Tonalidad en FM, cejilla en 1º traste","tags":[41,25]},
-{"id":90,"title":"Gloria a Dios en el cielo “Texto litúrgico”","source":90,"tags":[41,19]},
+{"id":90,"title":"Gloria a Dios en el cielo “Texto litúrgico”","source":90,"tags":[41,19],"comments":"Este canto fue compuesto para cantar en forma <strong>antifonal</strong>, es decir, a dos coros. <ol><li>El primer coro es <i>el Coro</i>.</li> <li>El segundo coro -marcado con <i>(R/)</i>- lo hace <i>la Asamblea</i>.</li></ol>También puede hacerse en forma <strong>salmódica</strong>, o sea: <ol><li>Un solista, sea A) el sacerdote o B) el coro</li><li>Le responde A) la asamblea junto con el coro, o B) la asamblea.</li></ol>"},
 {"id":91,"title":"Gloria a Dios en el cielo y su paz","source":91,"tags":[41,19]},
 {"id":92,"title":"Gloria, gloria a Dios en el cielo","source":92,"comments":"Tonalidad en F#m, cejilla en 2º traste","tags":[41,19]},
 {"id":93,"title":"He recibido al Dios de paz","source":93,"tags":[41,43,16]},
