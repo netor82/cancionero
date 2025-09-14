@@ -101,6 +101,23 @@ function onMouseUp(event: MouseEvent) {
     mouseXInitialPosition = -1; // Reset after processing
 }
 
+function removeChord() {
+    if (nota.value && lyrics.value) {
+        for (let i = 0; i < lyrics.value.notes.length; i++) {
+            const chordsLine = lyrics.value.notes[i];
+            if (chordsLine.length != 1) continue;
+
+            const index = chordsLine.indexOf(nota.value);
+            if (index !== -1) {
+                lyrics.value.notes[i].pop();
+                nota.value = null;
+                positionValue.value = 0;
+                return;
+            }
+        }
+    }
+}
+
 function processOriginalText() {
     if (originalText.value != null && originalText.value.value.trim()) {
         if (parseFromTextToLyric(originalText.value.value.trim())) {
@@ -217,7 +234,7 @@ function exportLyrics() {
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = 'letras.json'
+        a.download = 'lyrics.json'
         a.click()
         URL.revokeObjectURL(url)
     });
@@ -232,6 +249,7 @@ function exportLyrics() {
             <input v-model="lyricIdInput" @keyup.enter="loadLyrics" placeholder="Id existente + enter" />
             <button @click="reset" v-if="isLocalHost">🗑️</button>
             <input type="number" v-model="positionValue" @input="setPosition" ref="notaPosition" />
+            <button v-if="nota && positionValue == 0" @click="removeChord">❌</button>
             <div v-if="lyrics">
                 <span>Id: {{ lyrics?.id }} - {{ song?.title }}</span>
                 <button @click="clear">🔙</button>
