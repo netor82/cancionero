@@ -64,6 +64,10 @@ const handleFileUpload = (event: Event) => {
 </template>
 
 <style>
+.projects {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .projects .key {
   font-size: smaller;
   color: var(--color-text);

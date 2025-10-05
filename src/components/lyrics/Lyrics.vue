@@ -102,9 +102,6 @@ function calculateTranspose(original: number, delta:number): number {
   margin-top: 1rem;
   font-family: monospace, 'Courier New', Courier;
 }
-.lyrics-content p {
-  text-wrap: nowrap;
-}
 
 .chords {
   position: relative;

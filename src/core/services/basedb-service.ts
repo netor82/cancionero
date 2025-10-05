@@ -12,25 +12,22 @@ const KeyPath : string[] = [
 
 export default abstract class BaseDbService {
     protected static db: IDBDatabase | null = null
+    private static dbInitializedPromise: Promise<IDBDatabase> | null = null
     protected storeName: StoreName
 
     constructor(storeName: StoreName) {
         this.storeName = storeName
-        this.initDB()
+        if (!BaseDbService.dbInitializedPromise) {
+            this.initDB()
+        }
     }
 
     private getStoreName(): string {
         return KeyPath[this.storeName];
     }
 
-    private initDB(): Promise<void> {
-        return new Promise((resolve, reject) => {
-
-            if (BaseDbService.db) {
-                resolve();
-                return;
-            }
-
+    private initDB() {
+        BaseDbService.dbInitializedPromise = new Promise((resolve, reject) => {
             const request = indexedDB.open(_const.DB_NAME, _const.DB_VERSION)
 
             request.onerror = () => {
@@ -39,7 +36,7 @@ export default abstract class BaseDbService {
             }
             request.onsuccess = () => {
                 BaseDbService.db = request.result
-                resolve()
+                resolve(BaseDbService.db);
             };
 
             request.onupgradeneeded = (event) => {
@@ -56,11 +53,12 @@ export default abstract class BaseDbService {
 
      
 
-    protected readOnlyOperation<T>(operation: (objectStore: IDBObjectStore) => IDBRequest<T>): Promise<T> {
-        if (!BaseDbService.db) throw new Error('Database not initialized');
+    protected async readOnlyOperation<T>(operation: (objectStore: IDBObjectStore) => IDBRequest<T>): Promise<T> {
+        if (!BaseDbService.dbInitializedPromise) throw new Error('Database not initialized');
 
+        const db = await BaseDbService.dbInitializedPromise;
         return new Promise((resolve, reject) => {
-            const transaction = BaseDbService.db!.transaction(this.getStoreName(), 'readonly');
+            const transaction = db.transaction(this.getStoreName(), 'readonly');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             const request = operation(objectStore);
@@ -71,9 +69,10 @@ export default abstract class BaseDbService {
     }
 
     protected async clear(): Promise<void> {
-        if (!BaseDbService.db) throw new Error('Database not initialized');
+        if (!BaseDbService.dbInitializedPromise) throw new Error('Database not initialized');
 
-        const transaction = BaseDbService.db.transaction([this.getStoreName()], 'readwrite');
+        const db = await BaseDbService.dbInitializedPromise;
+        const transaction = db.transaction([this.getStoreName()], 'readwrite');
         const objectStore = transaction.objectStore(this.getStoreName());
         const request = objectStore.clear();
 
@@ -83,15 +82,16 @@ export default abstract class BaseDbService {
         });
     }
 
-    protected saveOperation<T>(value: T): Promise<void> {
+    protected async saveOperation<T>(value: T): Promise<void> {
         return this.saveAllOperation([value]);
     }
 
-    protected saveAllOperation<T>(value: T[]): Promise<void> {
-        if (!BaseDbService.db) throw new Error('Database not initialized');
+    protected async saveAllOperation<T>(value: T[]): Promise<void> {
+        if (!BaseDbService.dbInitializedPromise) throw new Error('Database not initialized');
 
-        return new Promise((resolve, reject) => {
-            const transaction = BaseDbService.db!.transaction([this.getStoreName()], 'readwrite');
+        const db = await BaseDbService.dbInitializedPromise;
+        return new Promise(async (resolve, reject) => {
+            const transaction = db.transaction([this.getStoreName()], 'readwrite');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             for (const item of value) {
@@ -103,11 +103,12 @@ export default abstract class BaseDbService {
         });
     }
 
-    protected deleteOperation<T>(id: number): Promise<void> {
-        if (!BaseDbService.db) throw new Error('Database not initialized');
+    protected async deleteOperation<T>(id: number): Promise<void> {
+        if (!BaseDbService.dbInitializedPromise) throw new Error('Database not initialized');
 
+        const db = await BaseDbService.dbInitializedPromise;
         return new Promise((resolve, reject) => {
-            const transaction = BaseDbService.db!.transaction([this.getStoreName()], 'readwrite');
+            const transaction = db.transaction([this.getStoreName()], 'readwrite');
             const objectStore = transaction.objectStore(this.getStoreName());
 
             const request = objectStore.delete(id);
