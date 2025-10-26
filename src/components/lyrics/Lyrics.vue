@@ -5,6 +5,7 @@ import type { Lyric } from '@/core/interfaces/lyrics'
 import lyricsService from '@/core/services/lyrics-service'
 import projectService from '@/core/services/project-service'
 import SongInfo from './SongInfo.vue'
+import Link from './Link.vue'
 import Chord from './Chord.vue'
 
 const message = ref('Seleccione una canción en el Índice')
@@ -72,6 +73,7 @@ function calculateTranspose(original: number, delta:number): number {
         {{ store.noteConvention === 2 ? '🎵' : (store.noteConvention ? '⭕' : '🎶') }}
       </button>
     </div>
+    <Link :song="store.song" />
     <div v-if="lyrics" class="lyrics-content">
       <div v-for="(notes, index) in lyrics.notes" :key="index">
         <p class="chords" v-if="store.noteConvention !== 2">

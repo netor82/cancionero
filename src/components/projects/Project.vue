@@ -13,6 +13,8 @@ const props = defineProps<{
 
 const originalTitle = ref(props.project.title);
 
+const newNoteItem = ref('');
+
 function saveTitle() {
     if (originalTitle.value !== props.project.title) {
         projectService.save(props.project);
@@ -34,6 +36,20 @@ const cloneProject = async () => {
         store.projects.unshift(created);
         gStore.project = created;
     });
+};
+
+const addNote = () => {
+    if (newNoteItem.value.trim()) {
+        props.project.songs.push({
+            id: 0,
+            transpose: 0,
+            label: newNoteItem.value.trim()
+        });
+        projectService.save(props.project).catch(error => {
+            console.error('Error saving project:', error);
+        });
+        newNoteItem.value = '';
+    }
 };
 
 
@@ -63,7 +79,7 @@ const swapSong = (indexA: number, indexB: number) => {
         <p class="date">{{ store.dateFormat(props.project.date) }}</p>
 
         <ul>
-            <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id" :project="props.project" :id="s.id">
+            <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id || i" :project="props.project" :id="s.id" :label="s.label">
                 <template #controls>
                     <button @click.stop="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
                     <button @click.stop="swapSong(i, i + 1)"
@@ -77,6 +93,12 @@ const swapSong = (indexA: number, indexB: number) => {
             <p>😅</p>
             <p>No tienes nada en esta lista.</p>
             <p>Ve al <a @click.stop="gStore.section.setActive(Sections.Songs)">Índice</a>, entra en la letra de una canción y añádela a esta lista.</p>
+        </div>
+
+        <div class="project-addNote-form">
+            <h5>Agregar nota a la lista:</h5>
+            <input v-model="newNoteItem" placeholder="Añadir nota" />
+            <button @click="addNote" :class="{'invisible': !newNoteItem}" >➕</button>
         </div>
     </div>
 </template>
@@ -94,5 +116,13 @@ input:focus {
     background: initial;
     border: initial;
     padding: 6px 8px;
+}
+
+.project-addNote-form {
+    margin-top: 16px;
+}
+.project-addNote-form input{
+    width: 75%;
+    font-size: large;
 }
 </style>

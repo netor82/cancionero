@@ -5,6 +5,7 @@ export interface Song {
     source: number
     comments: string
     tags: number[]
+    link?: string
 }
 
 export interface SearchableSong extends Song {

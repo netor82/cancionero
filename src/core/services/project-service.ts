@@ -78,7 +78,8 @@ class ProjectService extends BaseDbService {
             t: project.title,
             s: project.songs.map(song => ({
                 s: song.id,
-                t: song.transpose
+                t: song.transpose,
+                l: song.label
             }))
         };
     }
@@ -90,7 +91,8 @@ class ProjectService extends BaseDbService {
             date: new Date(dto.d),
             songs: dto.s.map(song => ({
                 id: song.s,
-                transpose: song.t
+                transpose: song.t,
+                label: song.l
             }))
         }
     }

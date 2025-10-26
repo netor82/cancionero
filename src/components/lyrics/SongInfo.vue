@@ -16,6 +16,7 @@ const song = computed(() => store.song);
       <h2>{{ song.title }}</h2>
       <Tag v-for="tag in song.tags" :key="tag" :id="tag" :tag="null" />
       <span>#{{ song.source }}</span>
+      <span v-if="song.author"> - {{ song.author }}</span>
     </div>
     <SongControl />
   </div>

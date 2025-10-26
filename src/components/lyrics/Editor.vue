@@ -131,6 +131,7 @@ function processOriginalText() {
 const fromNameToNote = (name: string, index: number) => {
     name = name.trim().toLowerCase()
     let note = 0
+    let found = false
 
     if (name.startsWith('sol')) {
         note = 7
@@ -140,24 +141,59 @@ const fromNameToNote = (name: string, index: number) => {
         switch (name.substring(0, 2)) {
             case 'do':
                 note = 0
+                found = true
                 break
             case 're':
                 note = 2
+                found = true
                 break
             case 'mi':
                 note = 4
+                found = true
                 break
             case 'fa':
                 note = 5
+                found = true
                 break
             case 'la':
                 note = 9
+                found = true
                 break
             case 'si':
                 note = 11
+                found = true
                 break
         }
-        name = name.substring(2)
+        if (found) {
+            name = name.substring(2)
+        }
+        else{
+            switch (name.substring(0, 1)) {
+                case 'c':
+                    note = 0
+                    break
+                case 'd':
+                    note = 2
+                    break
+                case 'e':
+                    note = 4
+                    break
+                case 'f':
+                    note = 5
+                    break
+                case 'g':
+                    note = 7
+                    break
+                case 'a':
+                    note = 9
+                    break
+                case 'b':
+                    note = 11
+                    break
+            }
+            name = name.substring(1)
+        }
+
     }
 
     if (name.startsWith('#')) {
@@ -202,7 +238,7 @@ function parseFromTextToLyric(text: string): boolean {
 
     const id = Number(firstLine.trim())
     if (isNaN(id) || id == 0) {
-        message.value = "Me falta el id"
+        message.value = "Me falta el id en la primera línea"
         return false
     }
 
@@ -229,7 +265,7 @@ function parseFromTextToLyric(text: string): boolean {
 
 function exportLyrics() {
     lyricsService.getAll().then((allLyrics) => {
-        const blobParts = [ "[\n", ...allLyrics.map(x => JSON.stringify(x) + ",\n"),"]" ]
+        const blobParts = [ "[\n", ...allLyrics.map((x,idx) => JSON.stringify(x) + (idx < allLyrics.length - 1 ? ",\n" : "\n")),"]" ]
         const blob = new Blob(blobParts, { type: 'application/json' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')

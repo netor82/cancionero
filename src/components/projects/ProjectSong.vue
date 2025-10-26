@@ -9,6 +9,7 @@ import { Sections } from '@/core/enums/sections';
 const props = defineProps<{
     project: Project
     id: number
+    label?: string
 }>()
 
 const song = computed(() => {
@@ -24,6 +25,7 @@ const removeSong = () => {
 }
 
 const selectSong = () => {
+    if (!song.value) return;
     gStore.song = song.value
     gStore.section.setActive(Sections.Lyrics);
 }
@@ -34,7 +36,8 @@ const selectSong = () => {
     <li @click.stop="selectSong()" class="controls">
         <div>
             <button @click.stop="removeSong()">❌</button>
-            {{ song?.title }}
+            <span v-if="!id">📃</span>
+            {{ song?.title || label }}
         </div>
         <div>
             <slot name="controls" />
