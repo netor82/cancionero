@@ -23,13 +23,15 @@ const includeExcludeSong = () : void => {
 
 const moveIndex = (delta: number) : void => {
     if (!store.project || index.value < 0) return
-    const newIndex = index.value + delta
-    if (newIndex < 0 || newIndex >= store.project.songs.length) return
 
-    const newSongId = store.project.songs[newIndex].id
-    const song = store.songs.find(s => s.id === newSongId)
-    if (song) {
-        store.song = song
+    for (let i = index.value + delta; i >= 0 && i < store.project!.songs.length; i += delta) {
+        const newSongId = store.project!.songs[i].id
+        if (newSongId == 0) continue
+        const song = store.songs.find(s => s.id === newSongId)
+        if (song) {
+            store.song = song
+        }
+        break
     }
 }
 

@@ -79,7 +79,7 @@ const swapSong = (indexA: number, indexB: number) => {
         <p class="date">{{ store.dateFormat(props.project.date) }}</p>
 
         <ul>
-            <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id || i" :project="props.project" :id="s.id" :label="s.label">
+            <ProjectSong v-for="(s, i) in props.project.songs" :key="s.id || -i" :project="props.project" :id="s.id || -i" :label="s.label">
                 <template #controls>
                     <button @click.stop="swapSong(i, i - 1)" v-if="i > 0">⬆️</button>
                     <button @click.stop="swapSong(i, i + 1)"

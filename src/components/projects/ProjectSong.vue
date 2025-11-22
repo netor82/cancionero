@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Project } from '@/core/interfaces/project';
+import type { Project, ProjectSong } from '@/core/interfaces/project';
 import { computed } from 'vue';
 import { store as gStore } from '@/core/store';
 import projectService from '@/core/services/project-service';
@@ -17,7 +17,9 @@ const song = computed(() => {
 })
 
 const removeSong = () => {
-    props.project.songs = props.project.songs.filter(s => s.id !== song.value!.id)
+    props.project.songs = props.project.songs.filter(s =>
+        (props.id > 0 && s.id !== props.id)
+        || (props.label && s.label !== props.label))
 
     projectService.save(props.project).catch(error => {
         console.error('Error saving project:', error)
@@ -25,7 +27,6 @@ const removeSong = () => {
 }
 
 const selectSong = () => {
-    if (!song.value) return;
     gStore.song = song.value
     gStore.section.setActive(Sections.Lyrics);
 }
@@ -36,7 +37,7 @@ const selectSong = () => {
     <li @click.stop="selectSong()" class="controls">
         <div>
             <button @click.stop="removeSong()">❌</button>
-            <span v-if="!id">📃</span>
+            <span v-if="id < 0">📃</span>
             {{ song?.title || label }}
         </div>
         <div>

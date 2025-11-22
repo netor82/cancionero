@@ -89,7 +89,6 @@ function calculateTranspose(original: number, delta:number): number {
 <style>
 .lyrics button {
   padding: 4px 0;
-  margin: 0;
 }
 .lyrics-transponse {
   display: flex;
