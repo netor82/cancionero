@@ -1,6 +1,6 @@
 # .
 
-This template should help get you started developing with Vue 3 in Vite.
+Version structure: `[Lyrics, Songs, Tags]`, defined in [version-service.ts](./src/core/services/version-service.ts).
 
 ## Recommended IDE Setup
 

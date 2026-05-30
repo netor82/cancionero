@@ -37,7 +37,7 @@ const selectSong = () => {
     <li @click.stop="selectSong()" class="controls">
         <div>
             <button @click.stop="removeSong()">❌</button>
-            <span v-if="id < 0">📃</span>
+            <span v-if="id <= 0">📃</span>
             {{ song?.title || label }}
         </div>
         <div>

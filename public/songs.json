@@ -382,5 +382,10 @@
 {"id":381,"title":"Cordero","author":"Jorge Sibaja Saborío","source":381,"tags":[22,47]},
 {"id":382,"title":"Santo","author":"Luis","source":192,"tags":[21,42,47]},
 {"id":383,"title":"Credo","author":"Luis Enrique Ascoy","source":383,"tags":[30,47]},
-{"id":384,"title":"Somos sacerdocio real","source":127,"tags":[42,14]}
+{"id":384,"title":"Vamos Cantad","author":"Martín Valverde","source":127,"tags":[42,14]},
+{"id":385,"title":"Ten Piedad","tags":[18,47]},
+{"id":386,"title":"Somos sacerdocio real","source":127,"tags":[42,14,24]},
+{"id":387,"title":"Somos testigos","source":99,"tags":[42,11,14,17,24,34]},
+{"id":388,"title":"Santo - Señor de gloria y majestad","source":190,"tags":[42,21]},
+{"id":389,"title":"Consolad a mi pueblo","source":214,"tags":[42,17,24]}
 ]

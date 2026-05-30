@@ -67,6 +67,7 @@ function calculateTranspose(original: number, delta:number): number {
     <div v-if="lyrics" class="lyrics-transponse">
       <div v-if="store.noteConvention !== 2" class="inline">
         <button @click="changeTranspose(-1)">⬇️</button>
+        {{ !transpose ? '-' : '+' + transpose }}
         <button @click="changeTranspose(1)">⬆️</button>
       </div>
       <button @click="store.changeNoteConvention()">
