@@ -234,7 +234,7 @@
 {"id":233,"title":"Ven, Señor, no tardes en llegar","source":233,"tags":[41,1]},
 {"id":234,"title":"Ven, ven, Señor, no tardes","source":234,"tags":[41,1]},
 {"id":235,"title":"Victoria, tú reinarás","source":235,"comments":"Tonalidad en DbM, cejilla en 1º traste","tags":[41,6,9]},
-{"id":236,"title":"Vienen con alegría, Señor","source":236,"tags":[41,7,14]},
+{"id":236,"title":"Vienen con alegría, Señor","author":"Gabaráin","source":236,"tags":[41,7,14]},
 {"id":237,"title":"Vino y pan en oblación","source":237,"tags":[41,15]},
 {"id":238,"title":"Viva la Virgen, nuestra patrona","source":238,"tags":[41,25]},
 {"id":239,"title":"Viva, viva, Jesús, mi amor","source":239,"comments":"Tonalidad en BM, cejilla en 2º traste","tags":[41,2,4,25]},
@@ -325,7 +325,7 @@
 {"id":324,"title":"Rendid a Yahvéh “Sobre los mares resuena”","source":324,"tags":[41,45,31]},
 {"id":325,"title":"Somos un pueblo que avanza","source":325,"tags":[41,6,9,14]},
 {"id":326,"title":"Una noche de sudor “Siervo por amor”","source":326,"comments":"Tonalidad en Cm, cejilla en 1º traste","tags":[41,40]},
-{"id":327,"title":"Ven Espíritu Santo (Secuencia)","source":327,"comments":"Tonalidad en Cm, cejilla en 3º traste","tags":[41,12,34]},
+{"id":327,"title":"Ven Espíritu Santo (Secuencia de Pentecostés)","source":327,"comments":"Tonalidad en Cm, cejilla en 3º traste","tags":[41,12,34]},
 {"id":328,"title":"Ven y adora sacerdocio real","source":328,"tags":[41,43,45]},
 {"id":329,"title":"Vine a alabar a Dios","source":329,"comments":"Tonalidad en BbM, cejilla en 1º traste","tags":[41,43]},
 {"id":330,"title":"Yo soy sal de mi tierra","source":330,"tags":[41,17]},
@@ -387,5 +387,10 @@
 {"id":386,"title":"Somos sacerdocio real","source":127,"tags":[42,14,24]},
 {"id":387,"title":"Somos testigos","source":99,"tags":[42,11,14,17,24,34]},
 {"id":388,"title":"Santo - Señor de gloria y majestad","source":190,"tags":[42,21]},
-{"id":389,"title":"Consolad a mi pueblo","source":214,"tags":[42,17,24]}
+{"id":389,"title":"Consolad a mi pueblo","source":214,"tags":[42,17,24]},
+{"id":390,"title":"A tus puertas Jerusalén","source":118,"tags":[42,14]},
+{"id":391,"title":"Secuencia del Espíritu Santo","author":"Pbro. Glenn Gómez","source":106,"tags":[42,12]},
+{"id":392,"title":"Cristo está vivo, se encuentra en tu vida","source":1,"tags":[15]},
+{"id":393,"title":"Milagro de amor","author":"Hermana Glenda, María Constanza Fernández","source":150,"tags":[16,42],"link":"https://www.youtube.com/embed/UaD_R0Fk5Mo"},
+{"id":394,"title":"Alma misionera","author":"Pbro. Enrique García Vélez","source":158,"tags":[42,17],"link":"https://www.youtube.com/embed/6C4Yq-8VWPA"}
 ]
