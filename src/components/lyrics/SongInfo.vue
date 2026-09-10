@@ -19,6 +19,9 @@ const song = computed(() => store.song);
       <span v-if="song.author"> - {{ song.author }}</span>
     </div>
     <SongControl />
+    <div v-else>
+      <h2>{{ store.projectNote }}</h2>
+    </div>
   </div>
   <p v-if="song && song.comments" :innerHTML="song.comments"></p>
 </template>

@@ -9,6 +9,7 @@ import { Sections } from '@/core/enums/sections';
 const props = defineProps<{
     project: Project
     id: number
+    index: number
     label?: string
 }>()
 
@@ -27,7 +28,9 @@ const removeSong = () => {
 }
 
 const selectSong = () => {
+    gStore.projectIndex = props.index
     gStore.song = song.value
+    gStore.projectNote = song.value ? null : (props.label ?? '')
     gStore.section.setActive(Sections.Lyrics);
 }
 

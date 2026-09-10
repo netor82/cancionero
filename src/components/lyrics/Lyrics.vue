@@ -25,6 +25,12 @@ watch(() => store.song, (newIndex) => {
     }).catch(error => {
       console.error(`Error fetching lyrics for song ${newIndex.id}:`, error)
     });
+  } else if (store.projectNote) {
+    message.value = ''
+    lyrics.value = null
+  } else {
+    message.value = 'Seleccione una canción en el Índice'
+    lyrics.value = null
   }
 
 }, { immediate: true });

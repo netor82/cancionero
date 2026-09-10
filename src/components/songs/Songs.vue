@@ -28,6 +28,8 @@ const items = computed(() => {
 
 function setSong (song: Song) {
   gStore.song = song;
+  gStore.projectNote = null;
+  gStore.projectIndex = -1;
   gStore.section.setActive(Sections.Lyrics);
 };
 
