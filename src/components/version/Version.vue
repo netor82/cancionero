@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import versionService from '@/core/services/version-service'
 import Loading from '../Loading.vue';
 
@@ -19,12 +19,15 @@ function refreshVersion() {
     }
 }
 
+onMounted(() => {
+    refreshVersion();
+})
+
 </script>
 
 <template>
     <div v-if="!loading" class="inline">
         - v{{ version }}
-        <button class="refresh-button" @click="refreshVersion">🔁</button>
     </div>
     <Loading v-else />
 </template>
