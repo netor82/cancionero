@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import projectService from '@/core/services/project-service'
 import { store } from '@/core/store'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 
 const hasProject = computed(() => !!store.project)
+
 const index = computed(() => {
+    if (store.projectIndex >= 0) return store.projectIndex
     if (!store.project || !store.song) return -1
     return store.projectHas(store.song.id)
 })
@@ -24,16 +26,26 @@ const includeExcludeSong = () : void => {
 const moveIndex = (delta: number) : void => {
     if (!store.project || index.value < 0) return
 
-    for (let i = index.value + delta; i >= 0 && i < store.project!.songs.length; i += delta) {
-        const newSongId = store.project!.songs[i].id
-        if (newSongId == 0) continue
-        const song = store.songs.find(s => s.id === newSongId)
-        if (song) {
-            store.song = song
-        }
-        break
+    const newIndex = index.value + delta
+    if (newIndex < 0 || newIndex >= store.project.songs.length) return
+
+    const item = store.project.songs[newIndex]
+    if (item.id === 0) {
+        store.projectIndex = newIndex
+        store.song = null
+        store.projectNote = item.label ?? ''
+        return
+    }
+
+    const song = store.songs.find(s => s.id === item.id)
+    if (song) {
+        store.projectIndex = newIndex
+        store.projectNote = null
+        store.song = song
     }
 }
+
+defineExpose({ moveIndex })
 
 </script>
 
@@ -43,7 +55,7 @@ const moveIndex = (delta: number) : void => {
       <br />
       <button @click.stop="moveIndex(-1)" :class="{ invisible: !hasProject || index <= 0 }">⏮️</button>
       <button @click.stop="moveIndex(1)" :class="{ invisible: !store.project || index < 0 || index >= store.project.songs.length -1 }">⏭️</button>
-      <button @click.stop="includeExcludeSong">{{ index > -1 ? '✔️' : '➕' }}</button>
+      <button @click.stop="includeExcludeSong" v-if="store.song">{{ index > -1 ? '✔️' : '➕' }}</button>
     </div>
 </template>
 
