@@ -11,6 +11,17 @@ import Chord from './Chord.vue'
 const message = ref('Seleccione una canción en el Índice')
 const lyrics = ref<Lyric | null>(null)
 
+const DEFAULT_FONT_SIZE = 1
+const FONT_STEP = 0.1
+const MIN_FONT_SIZE = 0.5
+const MAX_FONT_SIZE = 2
+const fontSize = ref(DEFAULT_FONT_SIZE)
+
+const changeFontSize = (delta: number) => {
+  const next = Math.round((fontSize.value + delta) * 10) / 10
+  fontSize.value = Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, next))
+}
+
 const scrollContainer = ref<HTMLElement | null>(null)
 const autoScrolling = ref(false)
 let scrollIntervalId: ReturnType<typeof setInterval> | null = null
@@ -45,6 +56,7 @@ function toggleAutoScroll() {
 
 watch(() => store.song, () => {
   stopAutoScroll()
+  fontSize.value = DEFAULT_FONT_SIZE
 })
 
 watch(() => store.song, (newIndex) => {
@@ -106,7 +118,7 @@ function calculateTranspose(original: number, delta:number): number {
     <SongInfo />
     <p v-if="message" class="vertical-center">{{ message }}</p>
 
-    <div v-if="lyrics" class="lyrics-transponse">
+    <div v-if="lyrics" class="lyrics-controls">
       <div v-if="store.noteConvention !== 2" class="inline">
         <button @click="changeTranspose(-1)">⬇️</button>
         {{ !transpose ? '-' : '+' + transpose }}
@@ -118,9 +130,11 @@ function calculateTranspose(original: number, delta:number): number {
       <button @click="toggleAutoScroll">
         {{ autoScrolling ? '⏸️' : '▶️' }}
       </button>
+      <button @click="changeFontSize(-FONT_STEP)">➖<small>A</small></button>
+      <button @click="changeFontSize(FONT_STEP)">A➕</button>
     </div>
     <Link :song="store.song" />
-    <div v-if="lyrics" class="lyrics-content">
+    <div v-if="lyrics" class="lyrics-content" :style="{ fontSize: fontSize + 'em' }">
       <div v-for="(notes, index) in lyrics.notes" :key="index">
         <p class="chords" v-if="store.noteConvention !== 2">
           <Chord v-for="chord in notes" :chord="chord" :transpose="transpose" />&nbsp;
@@ -136,19 +150,22 @@ function calculateTranspose(original: number, delta:number): number {
 .lyrics button {
   padding: 4px 0;
 }
-.lyrics-transponse button {
+.lyrics-controls button {
   font-size: 1.5rem;
   padding: 8px 12px;
 }
-.lyrics-transponse {
+.lyrics-controls > button:last-child {
+  margin-left: -18px;
+}
+.lyrics-controls {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 11;
 }
-.lyrics-transponse span {
+.lyrics-controls span {
   margin-top: 4px;
 }
 
