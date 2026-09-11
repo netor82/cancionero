@@ -31,6 +31,28 @@ const confirmDelete = async () => {
     }
 };
 
+const sharing = ref(false);
+
+const shareProject = async () => {
+    if (sharing.value) return;
+    sharing.value = true;
+    try {
+        const url = await projectService.share(props.project);
+        if (navigator.share) {
+            await navigator.share({ title: props.project.title, url });
+        } else {
+            await navigator.clipboard.writeText(url);
+            alert('Enlace copiado al portapapeles');
+        }
+    } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        console.error('Error al compartir la lista:', error);
+        alert('No se pudo compartir la lista');
+    } finally {
+        sharing.value = false;
+    }
+};
+
 const cloneProject = async () => {
     await projectService.clone(props.project).then((created) => {
         store.projects.unshift(created);
@@ -70,7 +92,7 @@ const swapSong = (indexA: number, indexB: number) => {
         <div class="inline">
             <button @click="cloneProject">🈁Clonar</button>
             <button @click="confirmDelete">❌Borrar</button>
-            <button @click="projectService.export(props.project)">⬇️Descargar</button>
+            <button @click="shareProject" :disabled="sharing">📤Compartir</button>
         </div>
     </div>
     <div class="project">

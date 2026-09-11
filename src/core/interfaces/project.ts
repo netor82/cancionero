@@ -3,6 +3,7 @@ export interface Project {
     date: Date
     title: string
     songs: ProjectSong[]
+    shareId?: string | null
 }
 
 export interface ProjectSong {

@@ -2,6 +2,7 @@ import _const from '../enums/const';
 import type { Project, ProjectDTO } from '../interfaces/project';
 import { deepToRaw } from '../utils/deepToRaw';
 import BaseDbService, { StoreName } from './basedb-service';
+import shareService from './share-service';
 
 class ProjectService extends BaseDbService {
     private static instance: ProjectService
@@ -40,6 +41,7 @@ class ProjectService extends BaseDbService {
         clone.date = new Date()
         clone.id = clone.date.getTime()
         clone.title += '*'
+        clone.shareId = null
         await this.saveOperation(clone);
         return clone;
     }
@@ -70,6 +72,28 @@ class ProjectService extends BaseDbService {
         const project = this.fromDTO(dto[0])
         this.save(project)
         return project
+    }
+
+    async share(project: Project): Promise<string> {
+        const dto = await this.toDTO(project);
+        const content = JSON.stringify([dto]);
+        const id = await shareService.save(content, project.shareId);
+
+        if (project.shareId !== id) {
+            project.shareId = id;
+            await this.save(project);
+        }
+
+        return shareService.buildShareUrl(id);
+    }
+
+    async importFromShare(id: string): Promise<Project> {
+        const content = await shareService.get(id) as unknown;
+        const dto = content as ProjectDTO[];
+        const project = this.fromDTO(dto[0]);
+        project.shareId = id;
+        await this.save(project);
+        return project;
     }
 
     private toDTO(project: Project): ProjectDTO {

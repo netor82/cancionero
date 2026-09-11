@@ -9,13 +9,34 @@ import Editor from './components/lyrics/Editor.vue';
 import SongEditor from './components/songs/SongEditor.vue';
 import Projects from './components/projects/Projects.vue';
 import Version from './components/version/Version.vue';
+import projectService from './core/services/project-service';
+import { store as projectsStore } from './components/projects/store';
 
 const localhost = window.location.hostname === 'localhost';
 const editMode = localhost || window.location.search.indexOf('edit=1') > 0;
 
-onMounted(() => {
-    initiator.init();
+onMounted(async () => {
+    await initiator.init();
+    await importSharedProject();
 })
+
+async function importSharedProject() {
+    const match = window.location.hash.match(/#list-id=([^&]+)/);
+    if (!match) return;
+
+    const id = decodeURIComponent(match[1]);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+
+    try {
+        const project = await projectService.importFromShare(id);
+        projectsStore.projects.push(project);
+        store.project = project;
+        store.section.setActive(Sections.Projects);
+    } catch (error) {
+        console.error('Error al importar la lista compartida:', error);
+        alert('No se pudo importar la lista compartida');
+    }
+}
 
 function active(s: Sections):void {
     store.section.setActive(s);
