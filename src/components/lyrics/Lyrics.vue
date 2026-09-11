@@ -11,6 +11,42 @@ import Chord from './Chord.vue'
 const message = ref('Seleccione una canción en el Índice')
 const lyrics = ref<Lyric | null>(null)
 
+const scrollContainer = ref<HTMLElement | null>(null)
+const autoScrolling = ref(false)
+let scrollIntervalId: ReturnType<typeof setInterval> | null = null
+
+function stopAutoScroll() {
+  if (scrollIntervalId) {
+    clearInterval(scrollIntervalId)
+    scrollIntervalId = null
+  }
+  autoScrolling.value = false
+}
+
+function startAutoScroll() {
+  autoScrolling.value = true
+  scrollIntervalId = setInterval(() => {
+    const el = scrollContainer.value
+    if (!el) return
+    el.scrollTop += 1
+    if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+      stopAutoScroll()
+    }
+  }, 50)
+}
+
+function toggleAutoScroll() {
+  if (autoScrolling.value) {
+    stopAutoScroll()
+  } else {
+    startAutoScroll()
+  }
+}
+
+watch(() => store.song, () => {
+  stopAutoScroll()
+})
+
 watch(() => store.song, (newIndex) => {
 
   if (newIndex) {
@@ -66,7 +102,7 @@ function calculateTranspose(original: number, delta:number): number {
 </script>
 
 <template>
-  <div class="lyrics vertical-scroll">
+  <div class="lyrics vertical-scroll" ref="scrollContainer">
     <SongInfo />
     <p v-if="message" class="vertical-center">{{ message }}</p>
 
@@ -78,6 +114,9 @@ function calculateTranspose(original: number, delta:number): number {
       </div>
       <button @click="store.changeNoteConvention()">
         {{ store.noteConvention === 2 ? '🎵' : (store.noteConvention ? '⭕' : '🎶') }}
+      </button>
+      <button @click="toggleAutoScroll">
+        {{ autoScrolling ? '⏸️' : '▶️' }}
       </button>
     </div>
     <Link :song="store.song" />
@@ -97,10 +136,17 @@ function calculateTranspose(original: number, delta:number): number {
 .lyrics button {
   padding: 4px 0;
 }
+.lyrics-transponse button {
+  font-size: 1.5rem;
+  padding: 8px 12px;
+}
 .lyrics-transponse {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   margin-top: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 .lyrics-transponse span {
   margin-top: 4px;
