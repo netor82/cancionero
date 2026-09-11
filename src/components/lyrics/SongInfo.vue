@@ -3,8 +3,22 @@ import { store } from '@/core/store';
 import { computed, ref } from 'vue';
 import Tag from '../Tag.vue';
 import SongControl from '../projects/SongControl.vue';
+import projectService from '@/core/services/project-service';
 
 const song = computed(() => store.song);
+
+let originalNote = '';
+
+const saveNote = () => {
+  const item = store.project?.songs[store.projectIndex];
+  if (!item) return;
+  if (originalNote !== store.projectNote) {
+    item.label = store.projectNote ?? '';
+    projectService.save(store.project!).catch(error => {
+      console.error('Error saving project:', error);
+    });
+  }
+};
 
 const songControl = ref<InstanceType<typeof SongControl> | null>(null);
 
@@ -37,7 +51,8 @@ const onTouchEnd = (e: TouchEvent) => {
       <span v-if="song.author"> - {{ song.author }}</span>
     </div>
     <div v-else>
-      <h2>{{ store.projectNote }}</h2>
+      <input type="text" class="note-input" v-model="store.projectNote"
+        @focusin="originalNote = store.projectNote ?? ''" @focusout="saveNote()" />
     </div>
     <SongControl ref="songControl" />
   </div>
@@ -52,5 +67,20 @@ const onTouchEnd = (e: TouchEvent) => {
 }
 .song-info .tag {
   cursor: pointer;
+}
+.song-info .note-input {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: inherit;
+  color: inherit;
+}
+.song-info .note-input:focus {
+  background: initial;
+  border: initial;
+  padding: 6px 8px;
 }
 </style>
