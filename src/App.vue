@@ -2,7 +2,7 @@
 import Lyrics from './components/lyrics/Lyrics.vue'
 import Songs from './components/songs/Songs.vue';
 import { Sections } from './core/enums/sections'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { initiator } from './core/loader/initiator';
 import { store } from './core/store';
 import Editor from './components/lyrics/Editor.vue';
@@ -40,6 +40,14 @@ async function importSharedProject() {
 
 function active(s: Sections):void {
     store.section.setActive(s);
+}
+
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark = ref(prefersDark);
+
+function toggleTheme(): void {
+    isDark.value = !isDark.value;
+    document.documentElement.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
 }
 </script>
 
@@ -94,8 +102,16 @@ function active(s: Sections):void {
 
     <footer>
       <div class="wrapper">
-        <p>Made with ❤️ by <a href="https://github.com/netor82" target="_blank">Neto</a></p>
+        <p>Made with ❤️ by <a href="https://github.com/netor82" target="_blank">Neto</a>
+          <button @click="toggleTheme" class="theme-toggle" :title="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">{{ isDark ? '☀️' : '🌙' }}</button>
+        </p>
       </div>
     </footer>
   </div>
 </template>
+
+<style scoped>
+.theme-toggle {
+  margin-left: 32px;
+}
+</style>
