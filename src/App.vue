@@ -9,6 +9,7 @@ import Editor from './components/lyrics/Editor.vue';
 import SongEditor from './components/songs/SongEditor.vue';
 import Projects from './components/projects/Projects.vue';
 import Version from './components/version/Version.vue';
+import Credits from './components/Credits.vue';
 import projectService from './core/services/project-service';
 import { store as projectsStore } from './components/projects/store';
 
@@ -102,7 +103,7 @@ function toggleTheme(): void {
 
     <footer>
       <div class="wrapper">
-        <p>Made with ❤️ by <a href="https://github.com/netor82" target="_blank">Neto</a>
+        <p>Made with ❤️ by Neto · <Credits />
           <button @click="toggleTheme" class="theme-toggle" :title="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">{{ isDark ? '☀️' : '🌙' }}</button>
         </p>
       </div>
